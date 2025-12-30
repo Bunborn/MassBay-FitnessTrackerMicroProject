@@ -10,19 +10,19 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
             thisFile = mfilename('fullpath');
             testsFolder = fileparts(fileparts(thisFile));
             testCase.projectRoot = fileparts(testsFolder);
-            addpath(testCase.projectRoot);
+            addpath(fullfile(testCase.projectRoot, 'tracker'));
         end
     end
     
     methods (TestMethodSetup)
         function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            testCase.testDataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
         end
     end
     
     methods (Test)
         function testGPSDistanceCalculation(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasPosition
@@ -52,7 +52,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testGPSDistanceResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasPosition
@@ -74,7 +74,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testPlotRoute(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasPosition
@@ -90,7 +90,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testPlotSegmentDistances(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasPosition
@@ -106,7 +106,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testDifferentStrideLengths(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasPosition
@@ -128,7 +128,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testDisplayResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasPosition

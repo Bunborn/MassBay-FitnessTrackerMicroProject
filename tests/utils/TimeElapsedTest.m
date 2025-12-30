@@ -9,7 +9,7 @@ classdef TimeElapsedTest < matlab.unittest.TestCase
             thisFile = mfilename('fullpath');
             testsFolder = fileparts(fileparts(thisFile));
             testCase.projectRoot = fileparts(testsFolder);
-            addpath(testCase.projectRoot);
+            addpath(fullfile(testCase.projectRoot, 'tracker'));
         end
     end
     

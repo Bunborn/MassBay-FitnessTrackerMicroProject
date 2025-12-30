@@ -2,7 +2,7 @@
 
 ## Test Organization
 
-Tests are organized to mirror the product code structure:
+Tests are organized to mirror the product code structure in `tracker/`:
 
 ```
 tests/

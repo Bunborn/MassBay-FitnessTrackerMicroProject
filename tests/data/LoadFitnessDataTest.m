@@ -10,19 +10,20 @@ classdef LoadFitnessDataTest < matlab.unittest.TestCase
             thisFile = mfilename('fullpath');
             testsFolder = fileparts(fileparts(thisFile));
             testCase.projectRoot = fileparts(testsFolder);
-            addpath(testCase.projectRoot);
+            % Add tracker folder to path for product code
+            addpath(fullfile(testCase.projectRoot, 'tracker'));
         end
     end
     
     methods (TestMethodSetup)
         function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            testCase.testDataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
         end
     end
     
     methods (Test)
         function testLoadFitnessData(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             
             fitnessData = data.loadFitnessData(dataPath);
             

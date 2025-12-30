@@ -10,19 +10,19 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
             thisFile = mfilename('fullpath');
             testsFolder = fileparts(fileparts(thisFile));
             testCase.projectRoot = fileparts(testsFolder);
-            addpath(testCase.projectRoot);
+            addpath(fullfile(testCase.projectRoot, 'tracker'));
         end
     end
     
     methods (TestMethodSetup)
         function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            testCase.testDataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
         end
     end
     
     methods (Test)
         function testAccelerationAnalysis(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -39,7 +39,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testAccelerationAnalysisResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -60,7 +60,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testPlotMagnitude(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -76,7 +76,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testPlotComponents(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -92,7 +92,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testDefaultPlot(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -108,7 +108,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testDisplayResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -122,7 +122,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testGetResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration

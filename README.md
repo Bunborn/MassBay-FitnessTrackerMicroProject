@@ -1,28 +1,62 @@
 <td>
-<img src="HackathonsBanner.jpg">
+<img src="course_materials/HackathonsBanner.jpg">
 </td>
 
-# Create Your Own Fitness Tracker with MATLAB Online and MATLAB Mobile
-This repository contains code and instructions to help you create your own fitness tracker with MATLAB Online and MATLAB Mobile for a Hackathon! 
+# Fitness Tracker with MATLAB
 
-Click here to open the code and repository in MATLAB Online:
+A modular fitness tracker application built with MATLAB, featuring acceleration analysis, step counting, GPS distance calculation, and ML-based activity classification.
 
-[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/matlab-mobile-fitness-tracker&file=ExampleModel.mlx)
+## Quick Start
 
-### Instructions.pdf
-This is the guide with detailed steps to help your team use MATLAB Mobile and MATLAB Online to create your fitness tracker. We have also included a simple example that you can use to start with or draw inspiration from as you create your own solution to this challenge!
+See **[QUICKSTART.md](QUICKSTART.md)** for a complete getting started guide.
 
-### GradingRubric.pdf
-This document provides the grading rubric that judges will be using for the challenge. 
+```matlab
+% Add product code to path
+addpath('tracker');
 
-### ExampleModel.mlx 
-This is a MATLAB Live Script that compiles the workflows shown in the instructions document into a code example. It shows how to process data acquired from a MATLAB Mobile session in order to make meaningful conclusions, and can be edited and executed in MATLAB or MATLAB Online. In order to run this Live Script, make sure ExampleData.mat, ActivityLogs.mat, and timeElapsed.m are in the same folder. 
+% Load data and run analysis
+fitnessData = data.loadFitnessData('tracker/data/ExampleData.mat');
+stepCounter = analysis.StepCounter();
+results = stepCounter.analyze(fitnessData);
+stepCounter.displayResults();
+```
 
-### ExampleData.mat 
-This is a MATLAB data file containing a set of sensor data previously acquired using the workflow demonstrated in the “Collecting Data” section of the 'Instructions' document.
+## Project Structure
 
-### ActivityLogs.mat
-This is a MATLAB data file containing a set of sensor data previously acquired using the workflow demonstrated in the “Collecting Data” section of the 'Instructions' document.
+```
+├── tracker/                 # Product code
+│   ├── +analysis/           # Analysis functions (AccelerationAnalysis, StepCounter, etc.)
+│   ├── +data/               # Data loading utilities
+│   ├── +utils/              # Helper utilities
+│   ├── data/                # Sample data files
+│   ├── docs/                # Technical documentation
+│   └── exampleUsage.m       # Usage examples
+├── tests/                   # Unit tests
+├── course_materials/        # Original hackathon materials
+│   ├── ExampleModel.mlx     # Original live script example
+│   ├── Instructions.pdf     # Hackathon instructions
+│   └── GradingRubric.pdf    # Grading rubric
+├── QUICKSTART.md            # Quick start guide
+└── README.md                # This file
+```
 
-### timeElapsed.m 
-This is a helper MATLAB function used in the example model to transform an array containing the date and time of the data points collected to an array of the time elapsed since the acquisition was started
+## Features
+
+- **Acceleration Analysis**: Compute magnitude and statistics from accelerometer data
+- **Step Counter**: Detect steps using peak detection algorithms
+- **GPS Distance Calculator**: Calculate distance traveled from GPS coordinates
+- **Activity Classifier**: ML-based activity classification (walking, running, sitting)
+
+## Running Tests
+
+```matlab
+results = runtests('tests');
+table(results)
+```
+
+## Original Course Materials
+
+The `course_materials/` folder contains the original hackathon materials:
+- **Instructions.pdf** - Detailed guide for using MATLAB Mobile and MATLAB Online
+- **GradingRubric.pdf** - Grading rubric for the challenge
+- **ExampleModel.mlx** - Original MATLAB Live Script example
