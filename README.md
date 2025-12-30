@@ -4,48 +4,65 @@
 
 # Fitness Tracker with MATLAB
 
-A modular fitness tracker application built with MATLAB, featuring acceleration analysis, step counting, GPS distance calculation, and ML-based activity classification.
+A modular fitness tracker for analyzing accelerometer and GPS data from MATLAB Mobile.
 
 ## Quick Start
 
-See **[QUICKSTART.md](QUICKSTART.md)** for a complete getting started guide.
-
 ```matlab
-% Add product code to path
+% Add tracker to path
 addpath('tracker');
 
-% Load data and run analysis
+% Load fitness data
 fitnessData = data.loadFitnessData('data/ExampleData.mat');
+
+% Analyze acceleration and count steps
 stepCounter = analysis.StepCounter();
+stepCounter.Threshold = 1.2;
 results = stepCounter.analyze(fitnessData);
-stepCounter.displayResults();
+stepCounter.plotSteps();
+
+% Calculate distance from GPS
+gpsCalc = analysis.GPSDistanceCalculator();
+gpsCalc.analyze(fitnessData);
+gpsCalc.plotRoute();
 ```
+
+See `docs/exampleUsage.m` for a complete walkthrough with visualizations.
 
 ## Project Structure
 
 ```
 ├── tracker/                 # Product code
-│   ├── +analysis/           # Analysis functions (AccelerationAnalysis, StepCounter, etc.)
-│   ├── +data/               # Data loading utilities
-│   ├── +utils/              # Helper utilities
-│   ├── data/                # Sample data files
-│   ├── docs/                # Technical documentation
-│   └── exampleUsage.m       # Usage examples
+│   ├── +analysis/           # Analysis classes
+│   ├── +data/               # Data loading
+│   ├── +train/              # ML model training
+│   ├── +utils/              # Utilities
+│   └── ARCHITECTURE.md      # Technical documentation
+├── data/                    # Sample data files
+├── docs/                    # Examples and API docs
+│   └── exampleUsage.m       # Interactive example script
 ├── tests/                   # Unit tests
-├── course_materials/        # Original hackathon materials
-│   ├── ExampleModel.mlx     # Original live script example
-│   ├── Instructions.pdf     # Hackathon instructions
-│   └── GradingRubric.pdf    # Grading rubric
-├── QUICKSTART.md            # Quick start guide
-└── README.md                # This file
+└── course_materials/        # Background & prototyping resources
 ```
 
-## Features
+## Analysis Classes
 
-- **Acceleration Analysis**: Compute magnitude and statistics from accelerometer data
-- **Step Counter**: Detect steps using peak detection algorithms
-- **GPS Distance Calculator**: Calculate distance traveled from GPS coordinates
-- **Activity Classifier**: ML-based activity classification (walking, running, sitting)
+| Class | Description |
+|-------|-------------|
+| `analysis.AccelerationAnalysis` | Magnitude and statistics from X,Y,Z accelerometer |
+| `analysis.StepCounter` | Peak detection step counting |
+| `analysis.GPSDistanceCalculator` | Distance from GPS coordinates |
+| `analysis.ActivityClassifier` | ML classification (walking, running, sitting) |
+
+## Course Materials
+
+The `course_materials/` folder contains resources for background and prototyping:
+
+- **ExampleModel.mlx** — Live Script demonstrating data exploration and analysis concepts
+- **Instructions.pdf** — Guide for collecting data with MATLAB Mobile
+- **GradingRubric.pdf** — Project requirements and grading criteria
+
+These materials provide context for the project goals and can be used as a starting point for experimentation before working with the modular tracker code.
 
 ## Running Tests
 
@@ -53,10 +70,3 @@ stepCounter.displayResults();
 results = runtests('tests');
 table(results)
 ```
-
-## Original Course Materials
-
-The `course_materials/` folder contains the original hackathon materials:
-- **Instructions.pdf** - Detailed guide for using MATLAB Mobile and MATLAB Online
-- **GradingRubric.pdf** - Grading rubric for the challenge
-- **ExampleModel.mlx** - Original MATLAB Live Script example
