@@ -16,7 +16,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
     
     methods (TestMethodSetup)
         function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ActivityLogs.mat');
+            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
         end
     end
     
@@ -36,7 +36,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testActivityClassification(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ActivityLogs.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
             
             % Load unknown acceleration data
             loadedData = load(dataPath);
@@ -73,7 +73,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testPlotDistribution(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ActivityLogs.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
             loadedData = load(dataPath);
             
             if ~isfield(loadedData, 'unknownAcceleration')
@@ -101,7 +101,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testPlotTimeline(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ActivityLogs.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
             loadedData = load(dataPath);
             
             if ~isfield(loadedData, 'unknownAcceleration')
@@ -129,7 +129,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testDisplayResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ActivityLogs.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
             loadedData = load(dataPath);
             
             if ~isfield(loadedData, 'unknownAcceleration')

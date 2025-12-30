@@ -17,13 +17,13 @@ classdef LoadFitnessDataTest < matlab.unittest.TestCase
     
     methods (TestMethodSetup)
         function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
         end
     end
     
     methods (Test)
         function testLoadFitnessData(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
             
             fitnessData = data.loadFitnessData(dataPath);
             

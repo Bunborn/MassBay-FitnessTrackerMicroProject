@@ -50,7 +50,7 @@ table(results)
 addpath('tracker');
 
 % Load some data
-fitnessData = data.loadFitnessData("tracker/data/ExampleData.mat");
+fitnessData = data.loadFitnessData("data/ExampleData.mat");
 
 % Create an analyzer
 stepCounter = analysis.StepCounter();
@@ -68,7 +68,7 @@ stepCounter.displayResults();
 ### Load Fitness Data
 ```matlab
 % Basic loading (from tracker folder)
-fitnessData = data.loadFitnessData("tracker/data/ExampleData.mat");
+fitnessData = data.loadFitnessData("data/ExampleData.mat");
 
 % Check what data is available
 if fitnessData.hasAcceleration
@@ -98,7 +98,7 @@ stepCounter.plotSteps();
 ### Use the Simple Orchestrator
 ```matlab
 % One function does it all!
-results = runAnalysis("tracker/data/ExampleData.mat", analysis.StepCounter());
+results = runAnalysis("data/ExampleData.mat", analysis.StepCounter());
 ```
 
 ## Creating Your Own Analysis Function
@@ -139,7 +139,7 @@ classdef MyNewAnalysisTest < matlab.unittest.TestCase
     methods (Test)
         function testMyNewAnalysis(testCase)
             addpath('tracker');
-            fitnessData = data.loadFitnessData('tracker/data/ExampleData.mat');
+            fitnessData = data.loadFitnessData('data/ExampleData.mat');
             
             analyzer = analysis.MyNewAnalysis();
             results = analyzer.analyze(fitnessData);

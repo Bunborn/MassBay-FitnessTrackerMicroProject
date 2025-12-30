@@ -15,7 +15,7 @@ See **[QUICKSTART.md](QUICKSTART.md)** for a complete getting started guide.
 addpath('tracker');
 
 % Load data and run analysis
-fitnessData = data.loadFitnessData('tracker/data/ExampleData.mat');
+fitnessData = data.loadFitnessData('data/ExampleData.mat');
 stepCounter = analysis.StepCounter();
 results = stepCounter.analyze(fitnessData);
 stepCounter.displayResults();

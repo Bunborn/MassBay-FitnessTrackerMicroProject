@@ -16,13 +16,13 @@ classdef StepCounterTest < matlab.unittest.TestCase
     
     methods (TestMethodSetup)
         function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
         end
     end
     
     methods (Test)
         function testStepCounter(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -50,7 +50,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testStepCounterResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -71,7 +71,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testPlotSteps(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -87,7 +87,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testDefaultPlot(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
@@ -103,7 +103,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testDifferentThresholds(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'tracker', 'data', 'ExampleData.mat');
+            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
             fitnessData = data.loadFitnessData(dataPath);
             
             if ~fitnessData.hasAcceleration
