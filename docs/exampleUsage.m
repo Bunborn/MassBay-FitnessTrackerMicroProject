@@ -1,10 +1,18 @@
 %% Fitness Tracker - Example Usage
 % Demonstrates the fitness tracker analysis classes
-% Run this script from the project root after: addpath('tracker')
 
-%% 1. Load Fitness Data
+%% 1. Setup Paths and Load Data
 clear; close all;
-fitnessData = data.loadFitnessData('data/ExampleData.mat');
+
+% Get project root from this file's location
+thisFile = mfilename('fullpath');
+docsFolder = fileparts(thisFile);
+projectRoot = fileparts(docsFolder);
+
+addpath(fullfile(projectRoot, "tracker"));
+
+% Load fitness data
+fitnessData = data.loadFitnessData(fullfile(projectRoot, 'data', 'ExampleData.mat'));
 
 %% 2. Acceleration Analysis
 accelAnalyzer = analysis.AccelerationAnalysis();
@@ -48,7 +56,7 @@ grid on;
 
 %% 6. Activity Classification (requires trained model)
 % Load activity data
-activityData = data.loadFitnessData('data/ActivityLogs.mat');
+activityData = data.loadFitnessData(fullfile(projectRoot, 'data', 'ActivityLogs.mat'));
 
 try
     classifier = analysis.ActivityClassifier();
