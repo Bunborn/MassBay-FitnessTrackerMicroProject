@@ -6,6 +6,8 @@
 
 A modular fitness tracker for analyzing accelerometer and GPS data from MATLAB Mobile.
 
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=Bunborn/MassBay-FitnessTrackerMicroProject&file=docs/exampleUsage.m)
+
 ## Quick Start
 
 ```matlab
@@ -70,3 +72,4 @@ These materials provide context for the project goals and can be used as a start
 results = runtests('tests');
 table(results)
 ```
+
