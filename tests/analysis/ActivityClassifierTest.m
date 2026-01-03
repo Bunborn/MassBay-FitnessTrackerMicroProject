@@ -1,24 +1,4 @@
-classdef ActivityClassifierTest < matlab.unittest.TestCase
-    
-    properties
-        testDataPath
-        projectRoot
-    end
-    
-    methods (TestClassSetup)
-        function setupPath(testCase)
-            thisFile = mfilename('fullpath');
-            testsFolder = fileparts(fileparts(thisFile));
-            testCase.projectRoot = fileparts(testsFolder);
-            addpath(fullfile(testCase.projectRoot, 'tracker'));
-        end
-    end
-    
-    methods (TestMethodSetup)
-        function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
-        end
-    end
+classdef ActivityClassifierTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testModelLoading(testCase)
@@ -36,10 +16,8 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testActivityClassification(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
-            
             % Load unknown acceleration data
-            loadedData = load(dataPath);
+            loadedData = load(testCase.getDataPath('ActivityLogs.mat'));
             if ~isfield(loadedData, 'unknownAcceleration')
                 testCase.assumeFail('Test data does not contain unknownAcceleration');
             end
@@ -73,8 +51,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testPlotDistribution(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
-            loadedData = load(dataPath);
+            loadedData = load(testCase.getDataPath('ActivityLogs.mat'));
             
             if ~isfield(loadedData, 'unknownAcceleration')
                 testCase.assumeFail('Test data does not contain unknownAcceleration');
@@ -101,8 +78,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testPlotTimeline(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
-            loadedData = load(dataPath);
+            loadedData = load(testCase.getDataPath('ActivityLogs.mat'));
             
             if ~isfield(loadedData, 'unknownAcceleration')
                 testCase.assumeFail('Test data does not contain unknownAcceleration');
@@ -129,8 +105,7 @@ classdef ActivityClassifierTest < matlab.unittest.TestCase
         end
         
         function testDisplayResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ActivityLogs.mat');
-            loadedData = load(dataPath);
+            loadedData = load(testCase.getDataPath('ActivityLogs.mat'));
             
             if ~isfield(loadedData, 'unknownAcceleration')
                 testCase.assumeFail('Test data does not contain unknownAcceleration');

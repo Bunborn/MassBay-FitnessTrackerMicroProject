@@ -1,29 +1,8 @@
-classdef StepCounterTest < matlab.unittest.TestCase
-    
-    properties
-        testDataPath
-        projectRoot
-    end
-    
-    methods (TestClassSetup)
-        function setupPath(testCase)
-            thisFile = mfilename('fullpath');
-            testsFolder = fileparts(fileparts(thisFile));
-            testCase.projectRoot = fileparts(testsFolder);
-            addpath(fullfile(testCase.projectRoot, 'tracker'));
-        end
-    end
-    
-    methods (TestMethodSetup)
-        function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-        end
-    end
+classdef StepCounterTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testStepCounter(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -50,8 +29,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testStepCounterResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -71,8 +49,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testPlotSteps(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -87,8 +64,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testDefaultPlot(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -103,8 +79,7 @@ classdef StepCounterTest < matlab.unittest.TestCase
         end
         
         function testDifferentThresholds(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');

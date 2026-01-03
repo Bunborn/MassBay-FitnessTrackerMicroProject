@@ -1,31 +1,8 @@
-classdef LoadFitnessDataTest < matlab.unittest.TestCase
-    
-    properties
-        testDataPath
-        projectRoot
-    end
-    
-    methods (TestClassSetup)
-        function setupPath(testCase)
-            thisFile = mfilename('fullpath');
-            testsFolder = fileparts(fileparts(thisFile));
-            testCase.projectRoot = fileparts(testsFolder);
-            % Add tracker folder to path for product code
-            addpath(fullfile(testCase.projectRoot, 'tracker'));
-        end
-    end
-    
-    methods (TestMethodSetup)
-        function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-        end
-    end
+classdef LoadFitnessDataTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testLoadFitnessData(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             testCase.verifyClass(fitnessData, 'struct');
             testCase.verifyTrue(isfield(fitnessData, 'hasAcceleration') || ...
@@ -41,7 +18,7 @@ classdef LoadFitnessDataTest < matlab.unittest.TestCase
         end
         
         function testLoadFitnessDataInvalidFileType(testCase)
-            invalidPath = fullfile(testCase.projectRoot, 'README.md');
+            invalidPath = fullfile(testCase.ProjectRoot, 'README.md');  %#ok<NASGU> projectRoot from base class
             
             testCase.verifyError(@() data.loadFitnessData(invalidPath), ...
                 'data:loadFitnessData:InvalidFileType');

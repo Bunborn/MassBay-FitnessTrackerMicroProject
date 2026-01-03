@@ -1,17 +1,4 @@
-classdef TimeElapsedTest < matlab.unittest.TestCase
-    
-    properties
-        projectRoot
-    end
-    
-    methods (TestClassSetup)
-        function setupPath(testCase)
-            thisFile = mfilename('fullpath');
-            testsFolder = fileparts(fileparts(thisFile));
-            testCase.projectRoot = fileparts(testsFolder);
-            addpath(fullfile(testCase.projectRoot, 'tracker'));
-        end
-    end
+classdef TimeElapsedTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testUtilsTimeElapsed(testCase)

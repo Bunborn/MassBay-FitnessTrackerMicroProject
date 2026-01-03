@@ -11,8 +11,8 @@ A modular fitness tracker for analyzing accelerometer and GPS data from MATLAB M
 ## Quick Start
 
 ```matlab
-% Add tracker to path
-addpath('tracker');
+% Setup paths
+setupPaths();
 
 % Load fitness data
 fitnessData = data.loadFitnessData('data/ExampleData.mat');
@@ -29,11 +29,13 @@ gpsCalc.analyze(fitnessData);
 gpsCalc.plotRoute();
 ```
 
-See `docs/exampleUsage.m` for a complete walkthrough with visualizations.
+See `fitnessTrackerDemo.m` for a complete walkthrough with visualizations.
 
 ## Project Structure
 
 ```
+├── setupPaths.m             # Path setup helper
+├── fitnessTrackerDemo.m     # Interactive demo script
 ├── tracker/                 # Product code
 │   ├── +analysis/           # Analysis classes
 │   ├── +data/               # Data loading
@@ -42,7 +44,7 @@ See `docs/exampleUsage.m` for a complete walkthrough with visualizations.
 │   └── ARCHITECTURE.md      # Technical documentation
 ├── data/                    # Sample data files
 ├── docs/                    # Examples and API docs
-│   └── exampleUsage.m       # Interactive example script
+│   └── tracker.html         # Documentation
 ├── tests/                   # Unit tests
 └── course_materials/        # Background & prototyping resources
 ```

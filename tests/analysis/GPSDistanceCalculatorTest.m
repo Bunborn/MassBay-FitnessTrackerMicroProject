@@ -1,29 +1,8 @@
-classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
-    
-    properties
-        testDataPath
-        projectRoot
-    end
-    
-    methods (TestClassSetup)
-        function setupPath(testCase)
-            thisFile = mfilename('fullpath');
-            testsFolder = fileparts(fileparts(thisFile));
-            testCase.projectRoot = fileparts(testsFolder);
-            addpath(fullfile(testCase.projectRoot, 'tracker'));
-        end
-    end
-    
-    methods (TestMethodSetup)
-        function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-        end
-    end
+classdef GPSDistanceCalculatorTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testGPSDistanceCalculation(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
@@ -52,8 +31,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testGPSDistanceResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
@@ -74,8 +52,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testPlotRoute(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
@@ -90,8 +67,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testPlotSegmentDistances(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
@@ -106,8 +82,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testDifferentStrideLengths(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
@@ -128,8 +103,7 @@ classdef GPSDistanceCalculatorTest < matlab.unittest.TestCase
         end
         
         function testDisplayResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');

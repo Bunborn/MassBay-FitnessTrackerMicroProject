@@ -1,29 +1,8 @@
-classdef AccelerationAnalysisTest < matlab.unittest.TestCase
-    
-    properties
-        testDataPath
-        projectRoot
-    end
-    
-    methods (TestClassSetup)
-        function setupPath(testCase)
-            thisFile = mfilename('fullpath');
-            testsFolder = fileparts(fileparts(thisFile));
-            testCase.projectRoot = fileparts(testsFolder);
-            addpath(fullfile(testCase.projectRoot, 'tracker'));
-        end
-    end
-    
-    methods (TestMethodSetup)
-        function setTestDataPath(testCase)
-            testCase.testDataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-        end
-    end
+classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testAccelerationAnalysis(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -39,8 +18,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testAccelerationAnalysisResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -60,8 +38,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testPlotMagnitude(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -76,8 +53,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testPlotComponents(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -92,8 +68,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testDefaultPlot(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -108,8 +83,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testDisplayResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
@@ -122,8 +96,7 @@ classdef AccelerationAnalysisTest < matlab.unittest.TestCase
         end
         
         function testGetResults(testCase)
-            dataPath = fullfile(testCase.projectRoot, 'data', 'ExampleData.mat');
-            fitnessData = data.loadFitnessData(dataPath);
+            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
