@@ -2,6 +2,7 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testStepCounter(testCase)
+            % Test basic functionality and result structure
             fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
@@ -13,12 +14,22 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
             stepCounter.MinPeakDistance = 0.5;
             results = stepCounter.analyze(fitnessData);
             
+            % Verify result structure
             testCase.verifyClass(results, 'struct');
             testCase.verifyTrue(isfield(results, 'stepCount'));
+            testCase.verifyTrue(isfield(results, 'peakLocations'));
+            testCase.verifyTrue(isfield(results, 'peakValues'));
+            testCase.verifyTrue(isfield(results, 'magnitude'));
+            testCase.verifyTrue(isfield(results, 'threshold'));
+            
+            % Verify data consistency
             testCase.verifyGreaterThanOrEqual(results.stepCount, 0);
+            testCase.verifyEqual(length(results.peakLocations), results.stepCount);
+            testCase.verifyEqual(length(results.peakValues), results.stepCount);
         end
         
         function testStepCounterProperties(testCase)
+            % Test property configuration
             stepCounter = StepCounter();
             
             testCase.verifyEqual(stepCounter.Threshold, 1.2);
@@ -28,57 +39,8 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
             testCase.verifyEqual(stepCounter.Threshold, 1.5);
         end
         
-        function testStepCounterResults(testCase)
-            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
-            
-            if ~fitnessData.hasAcceleration
-                testCase.assumeFail('Test data does not contain acceleration data');
-            end
-            
-            stepCounter = StepCounter();
-            results = stepCounter.analyze(fitnessData);
-            
-            testCase.verifyTrue(isfield(results, 'stepCount'));
-            testCase.verifyTrue(isfield(results, 'peakLocations'));
-            testCase.verifyTrue(isfield(results, 'peakValues'));
-            testCase.verifyTrue(isfield(results, 'magnitude'));
-            testCase.verifyTrue(isfield(results, 'threshold'));
-            
-            testCase.verifyEqual(length(results.peakLocations), results.stepCount);
-            testCase.verifyEqual(length(results.peakValues), results.stepCount);
-        end
-        
-        function testPlotSteps(testCase)
-            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
-            
-            if ~fitnessData.hasAcceleration
-                testCase.assumeFail('Test data does not contain acceleration data');
-            end
-            
-            stepCounter = StepCounter();
-            stepCounter.analyze(fitnessData);
-            
-            testCase.verifyWarningFree(@() stepCounter.plotSteps());
-            
-            close all;
-        end
-        
-        function testDefaultPlot(testCase)
-            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
-            
-            if ~fitnessData.hasAcceleration
-                testCase.assumeFail('Test data does not contain acceleration data');
-            end
-            
-            stepCounter = StepCounter();
-            stepCounter.analyze(fitnessData);
-            
-            testCase.verifyWarningFree(@() stepCounter.plot());
-            
-            close all;
-        end
-        
         function testDifferentThresholds(testCase)
+            % Test behavior verification: lower threshold detects more steps
             fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration

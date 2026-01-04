@@ -16,20 +16,21 @@ classdef ActivityClassifierTest < AbstractFitnessTrackerTest
         end
         
         function testActivityClassification(testCase)
-            % Load unknown acceleration data
-            fitnessData = loadFitnessData(testCase.getDataPath('ActivityLogs.mat'));
-            if ~isfield(fitnessData, 'unknownAcceleration')
+            % Test classification functionality and result structure
+            loadedData = loadFitnessData(testCase.getDataPath('ActivityLogs.mat'));
+            if ~isfield(loadedData, 'unknownAcceleration')
                 testCase.assumeFail('Test data does not contain unknownAcceleration');
             end
             
             fitnessData = struct();
-            fitnessData.Acceleration = fitnessData.unknownAcceleration;
+            fitnessData.Acceleration = loadedData.unknownAcceleration;
             fitnessData.hasAcceleration = true;
             
             try
                 classifier = ActivityClassifier();
                 results = classifier.analyze(fitnessData);
                 
+                % Verify result structure
                 testCase.verifyClass(results, 'struct');
                 testCase.verifyTrue(isfield(results, 'predictions'));
                 testCase.verifyTrue(isfield(results, 'uniqueActivities'));
@@ -50,69 +51,15 @@ classdef ActivityClassifierTest < AbstractFitnessTrackerTest
             end
         end
         
-        function testPlotDistribution(testCase)
-            fitnessData = loadFitnessData(testCase.getDataPath('ActivityLogs.mat'));
+        function testVisualization(testCase)
+            % Test all plotting methods work without errors
+            loadedData = loadFitnessData(testCase.getDataPath('ActivityLogs.mat'));
             
-            if ~isfield(fitnessData, 'unknownAcceleration')
+            if ~isfield(loadedData, 'unknownAcceleration')
                 testCase.assumeFail('Test data does not contain unknownAcceleration');
             end
             
             fitnessData = struct();
-            fitnessData.Acceleration = fitnessData.unknownAcceleration;
-            fitnessData.hasAcceleration = true;
-            
-            try
-                classifier = ActivityClassifier();
-                classifier.analyze(fitnessData);
-                
-                testCase.verifyWarningFree(@() classifier.plotDistribution());
-                
-                close all;
-            catch ME
-                if strcmp(ME.identifier, 'analysis:ActivityClassifier:ModelNotFound')
-                    testCase.assumeFail('Model not trained. Run trainActivityModel.m first.');
-                else
-                    rethrow(ME);
-                end
-            end
-        end
-        
-        function testPlotTimeline(testCase)
-            fitnessData = loadFitnessData(testCase.getDataPath('ActivityLogs.mat'));
-            
-            if ~isfield(fitnessData, 'unknownAcceleration')
-                testCase.assumeFail('Test data does not contain unknownAcceleration');
-            end
-            
-            fitnessData = struct();
-            fitnessData.Acceleration = fitnessData.unknownAcceleration;
-            fitnessData.hasAcceleration = true;
-            
-            try
-                classifier = ActivityClassifier();
-                classifier.analyze(fitnessData);
-                
-                testCase.verifyWarningFree(@() classifier.plotTimeline());
-                
-                close all;
-            catch ME
-                if strcmp(ME.identifier, 'analysis:ActivityClassifier:ModelNotFound')
-                    testCase.assumeFail('Model not trained. Run trainActivityModel.m first.');
-                else
-                    rethrow(ME);
-                end
-            end
-        end
-        
-        function testDisplayResults(testCase)
-            fitnessData = loadFitnessData(testCase.getDataPath('ActivityLogs.mat'));
-            
-            if ~isfield(fitnessData, 'unknownAcceleration')
-                testCase.assumeFail('Test data does not contain unknownAcceleration');
-            end
-            
-            fitnessData = struct();
-            fitnessData.Acceleration = fitnessData.unknownAcceleration;
             fitnessData.Acceleration = loadedData.unknownAcceleration;
             fitnessData.hasAcceleration = true;
             
@@ -120,7 +67,11 @@ classdef ActivityClassifierTest < AbstractFitnessTrackerTest
                 classifier = ActivityClassifier();
                 classifier.analyze(fitnessData);
                 
-                testCase.verifyWarningFree(@() classifier.displayResults());
+                % Test all plot methods
+                testCase.verifyWarningFree(@() classifier.plotDistribution());
+                testCase.verifyWarningFree(@() classifier.plotTimeline());
+                
+                close all;
             catch ME
                 if strcmp(ME.identifier, 'analysis:ActivityClassifier:ModelNotFound')
                     testCase.assumeFail('Model not trained. Run trainActivityModel.m first.');

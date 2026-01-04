@@ -7,7 +7,7 @@ function newArray = timeElapsed(datetime_array)
     %
     %   >> doc datetime
     %
-    % Copyright 2018 The MathWorks, Inc
+    % Copyright 2018-2026 The MathWorks, Inc
     
     newArray = second(datetime_array);
     arraySize = numel(newArray);
