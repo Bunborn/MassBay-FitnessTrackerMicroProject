@@ -34,7 +34,7 @@ classdef ActivityClassifierTest < AbstractFitnessTrackerTest
                 testCase.verifyTrue(isfield(results, 'predictions'));
                 testCase.verifyTrue(isfield(results, 'uniqueActivities'));
                 testCase.verifyTrue(isfield(results, 'activityCounts'));
-                testCase.verifyTrue(isfield(results, 'activityPercentage'));
+                testCase.verifyTrue(isfield(results, 'activityPercentages'));
                 
                 % Verify predictions are valid activities
                 validActivities = {'sitting', 'walking', 'running'};
