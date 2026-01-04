@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepCounter - Fitness Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo">Fitness Tracker</div>
+        <nav><a href="#">Community</a></nav>
+    </header>
+    
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                CONTENTS
+            </div>
+            <nav class="sidebar-nav">
+                <a href="tracker.html">Fitness Tracker</a>
+            </nav>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Packages</div>
+                <nav class="sidebar-nav">
+                    <a href="tracker.html#data">+data</a>
+                    <a href="tracker.html#analysis" class="active">+analysis</a>
+                    <a href="tracker.html#train">+train</a>
+                    <a href="tracker.html#utils">+utils</a>
+                </nav>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Analysis Classes</div>
+                <nav class="sidebar-nav">
+                    <a href="AccelerationAnalysis.html">AccelerationAnalysis</a>
+                    <a href="StepCounter.html" class="active">StepCounter</a>
+                    <a href="GPSDistanceCalculator.html">GPSDistanceCalculator</a>
+                    <a href="ActivityClassifier.html">ActivityClassifier</a>
+                </nav>
+            </div>
+        </aside>
+        
+        <main class="content">
+            <div class="content-tabs">
+                <a href="tracker.html" class="active">Documentation</a>
+                <a href="examples.html">Examples</a>
+                <a href="functions.html">Functions</a>
+            </div>
+            
+            <div class="content-body">
+                <h1 class="page-title">StepCounter</h1>
+                <p class="page-subtitle">Detect steps using peak detection on acceleration</p>
+                
+                <p class="page-description">
+                    Estimates step count by detecting peaks in acceleration magnitude. 
+                    Configurable threshold and minimum peak distance allow tuning for different walking styles.
+                    Inherits from <code>AnalysisFunction</code>.
+                </p>
+                
+                <h2>Syntax</h2>
+                <pre><code>stepCounter = analysis.StepCounter()
+stepCounter.Threshold = 1.2;
+results = stepCounter.analyze(fitnessData)
+stepCounter.plotSteps()</code></pre>
+                
+                <h2>Properties</h2>
+                <table>
+                    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+                    <tr><td><code>Threshold</code></td><td>1.2</td><td>Minimum peak height (in g) for step detection</td></tr>
+                    <tr><td><code>MinPeakDistance</code></td><td>0.5</td><td>Minimum time between peaks (seconds)</td></tr>
+                </table>
+                
+                <h2>Methods</h2>
+                <table>
+                    <tr><th>Method</th><th>Description</th></tr>
+                    <tr><td><code>analyze(fitnessData)</code></td><td>Detect steps and return results struct</td></tr>
+                    <tr><td><code>plotSteps()</code></td><td>Plot magnitude with detected peaks marked</td></tr>
+                    <tr><td><code>plot()</code></td><td>Default plot (calls plotSteps)</td></tr>
+                    <tr><td><code>displayResults()</code></td><td>Print step count to console</td></tr>
+                    <tr><td><code>getResults()</code></td><td>Return results structure</td></tr>
+                </table>
+                
+                <h2>Output Arguments</h2>
+                <table>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><code>stepCount</code></td><td>integer</td><td>Total number of detected steps</td></tr>
+                    <tr><td><code>peakLocations</code></td><td>double array</td><td>Indices of detected peaks</td></tr>
+                    <tr><td><code>peakValues</code></td><td>double array</td><td>Magnitude values at each peak</td></tr>
+                    <tr><td><code>magnitude</code></td><td>double array</td><td>Full acceleration magnitude signal</td></tr>
+                    <tr><td><code>threshold</code></td><td>double</td><td>Threshold value used</td></tr>
+                </table>
+                
+                <h2>Examples</h2>
+                <h3>Basic Step Counting</h3>
+                <pre><code><span class="code-comment">% Load data</span>
+fitnessData = data.loadFitnessData(<span class="code-string">'data/ExampleData.mat'</span>);
+
+<span class="code-comment">% Count steps with default settings</span>
+stepCounter = analysis.StepCounter();
+results = stepCounter.analyze(fitnessData);
+
+fprintf(<span class="code-string">'Steps detected: %d\n'</span>, results.stepCount);</code></pre>
+                
+                <h3>Adjusting Sensitivity</h3>
+                <pre><code><span class="code-comment">% Lower threshold = more sensitive (detects more steps)</span>
+stepCounter = analysis.StepCounter();
+stepCounter.Threshold = 1.0;
+results1 = stepCounter.analyze(fitnessData);
+
+<span class="code-comment">% Higher threshold = less sensitive (detects fewer steps)</span>
+stepCounter.Threshold = 1.5;
+results2 = stepCounter.analyze(fitnessData);
+
+fprintf(<span class="code-string">'Low threshold: %d steps\n'</span>, results1.stepCount);
+fprintf(<span class="code-string">'High threshold: %d steps\n'</span>, results2.stepCount);</code></pre>
+                
+                <h3>Visualization</h3>
+                <pre><code><span class="code-comment">% Plot steps with peaks marked</span>
+stepCounter = analysis.StepCounter();
+stepCounter.analyze(fitnessData);
+stepCounter.plotSteps();</code></pre>
+                
+                <h2>Algorithm</h2>
+                <p>
+                    The step counter uses MATLAB's <code>findpeaks</code> function on the acceleration 
+                    magnitude signal. Peaks above the threshold with sufficient separation are counted as steps.
+                </p>
+                
+                <h2>See Also</h2>
+                <p>
+                    <a href="AccelerationAnalysis.html">AccelerationAnalysis</a> | 
+                    <a href="GPSDistanceCalculator.html">GPSDistanceCalculator</a> | 
+                    <a href="ActivityClassifier.html">ActivityClassifier</a>
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

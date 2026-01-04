@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccelerationAnalysis - Fitness Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo">Fitness Tracker</div>
+        <nav><a href="#">Community</a></nav>
+    </header>
+    
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                CONTENTS
+            </div>
+            <nav class="sidebar-nav">
+                <a href="tracker.html">Fitness Tracker</a>
+            </nav>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Packages</div>
+                <nav class="sidebar-nav">
+                    <a href="tracker.html#data">+data</a>
+                    <a href="tracker.html#analysis" class="active">+analysis</a>
+                    <a href="tracker.html#train">+train</a>
+                    <a href="tracker.html#utils">+utils</a>
+                </nav>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Analysis Classes</div>
+                <nav class="sidebar-nav">
+                    <a href="AccelerationAnalysis.html" class="active">AccelerationAnalysis</a>
+                    <a href="StepCounter.html">StepCounter</a>
+                    <a href="GPSDistanceCalculator.html">GPSDistanceCalculator</a>
+                    <a href="ActivityClassifier.html">ActivityClassifier</a>
+                </nav>
+            </div>
+        </aside>
+        
+        <main class="content">
+            <div class="content-tabs">
+                <a href="tracker.html" class="active">Documentation</a>
+                <a href="examples.html">Examples</a>
+                <a href="functions.html">Functions</a>
+            </div>
+            
+            <div class="content-body">
+                <h1 class="page-title">AccelerationAnalysis</h1>
+                <p class="page-subtitle">Compute acceleration magnitude and statistics</p>
+                
+                <p class="page-description">
+                    Analyzes 3-axis accelerometer data to compute magnitude and statistical measures. 
+                    Inherits from <code>AnalysisFunction</code>.
+                </p>
+                
+                <h2>Syntax</h2>
+                <pre><code>analyzer = analysis.AccelerationAnalysis()
+results = analyzer.analyze(fitnessData)
+analyzer.plotMagnitude()
+analyzer.plotComponents()</code></pre>
+                
+                <h2>Description</h2>
+                <p>
+                    <code>AccelerationAnalysis</code> computes the acceleration magnitude from X, Y, Z 
+                    components using √(X² + Y² + Z²) and provides statistical analysis including 
+                    mean, standard deviation, min, max, and median values.
+                </p>
+                
+                <h2>Methods</h2>
+                <table>
+                    <tr><th>Method</th><th>Description</th></tr>
+                    <tr><td><code>analyze(fitnessData)</code></td><td>Run analysis on fitness data, returns results struct</td></tr>
+                    <tr><td><code>plotMagnitude()</code></td><td>Plot acceleration magnitude over time</td></tr>
+                    <tr><td><code>plotComponents()</code></td><td>Plot X, Y, Z components separately</td></tr>
+                    <tr><td><code>plot()</code></td><td>Default plot (calls plotMagnitude)</td></tr>
+                    <tr><td><code>displayResults()</code></td><td>Print results to console</td></tr>
+                    <tr><td><code>getResults()</code></td><td>Return results structure</td></tr>
+                </table>
+                
+                <h2>Output Arguments</h2>
+                <table>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><code>magnitude</code></td><td>double array</td><td>Computed acceleration magnitude √(X² + Y² + Z²)</td></tr>
+                    <tr><td><code>X</code></td><td>double array</td><td>X-axis acceleration data</td></tr>
+                    <tr><td><code>Y</code></td><td>double array</td><td>Y-axis acceleration data</td></tr>
+                    <tr><td><code>Z</code></td><td>double array</td><td>Z-axis acceleration data</td></tr>
+                    <tr><td><code>timeData</code></td><td>datetime array</td><td>Timestamps for each sample</td></tr>
+                    <tr><td><code>stats</code></td><td>struct</td><td>Statistics: mean, std, max, min, median</td></tr>
+                </table>
+                
+                <h2>Examples</h2>
+                <h3>Basic Usage</h3>
+                <pre><code><span class="code-comment">% Load data and analyze</span>
+fitnessData = data.loadFitnessData(<span class="code-string">'data/ExampleData.mat'</span>);
+
+analyzer = analysis.AccelerationAnalysis();
+results = analyzer.analyze(fitnessData);
+
+<span class="code-comment">% Display statistics</span>
+fprintf(<span class="code-string">'Mean acceleration: %.2f g\n'</span>, results.stats.mean);
+fprintf(<span class="code-string">'Max acceleration: %.2f g\n'</span>, results.stats.max);</code></pre>
+                
+                <h3>Visualization</h3>
+                <pre><code><span class="code-comment">% Plot magnitude and components</span>
+figure;
+subplot(2,1,1);
+analyzer.plotMagnitude();
+
+subplot(2,1,2);
+analyzer.plotComponents();</code></pre>
+                
+                <h2>See Also</h2>
+                <p>
+                    <a href="StepCounter.html">StepCounter</a> | 
+                    <a href="GPSDistanceCalculator.html">GPSDistanceCalculator</a> | 
+                    <a href="ActivityClassifier.html">ActivityClassifier</a>
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

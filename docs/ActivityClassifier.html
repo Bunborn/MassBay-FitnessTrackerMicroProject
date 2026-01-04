@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ActivityClassifier - Fitness Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo">Fitness Tracker</div>
+        <nav><a href="#">Community</a></nav>
+    </header>
+    
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                CONTENTS
+            </div>
+            <nav class="sidebar-nav">
+                <a href="tracker.html">Fitness Tracker</a>
+            </nav>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Packages</div>
+                <nav class="sidebar-nav">
+                    <a href="tracker.html#data">+data</a>
+                    <a href="tracker.html#analysis" class="active">+analysis</a>
+                    <a href="tracker.html#train">+train</a>
+                    <a href="tracker.html#utils">+utils</a>
+                </nav>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Analysis Classes</div>
+                <nav class="sidebar-nav">
+                    <a href="AccelerationAnalysis.html">AccelerationAnalysis</a>
+                    <a href="StepCounter.html">StepCounter</a>
+                    <a href="GPSDistanceCalculator.html">GPSDistanceCalculator</a>
+                    <a href="ActivityClassifier.html" class="active">ActivityClassifier</a>
+                </nav>
+            </div>
+        </aside>
+        
+        <main class="content">
+            <div class="content-tabs">
+                <a href="tracker.html" class="active">Documentation</a>
+                <a href="examples.html">Examples</a>
+                <a href="functions.html">Functions</a>
+            </div>
+            
+            <div class="content-body">
+                <h1 class="page-title">ActivityClassifier</h1>
+                <p class="page-subtitle">ML-based activity classification</p>
+                
+                <p class="page-description">
+                    Classifies acceleration data into activity types (sitting, walking, running) using 
+                    a trained machine learning model. Requires a pre-trained model file.
+                    Inherits from <code>AnalysisFunction</code>.
+                </p>
+                
+                <div style="background: #FFF3E0; border: 1px solid #FFB74D; border-radius: 4px; padding: 15px; margin: 20px 0;">
+                    <strong>Note:</strong> This class requires a trained model. Run 
+                    <code>train.trainActivityModel</code> first to generate the model file.
+                </div>
+                
+                <h2>Syntax</h2>
+                <pre><code>classifier = analysis.ActivityClassifier()
+results = classifier.analyze(fitnessData)
+classifier.plotDistribution()
+classifier.plotTimeline()</code></pre>
+                
+                <h2>Methods</h2>
+                <table>
+                    <tr><th>Method</th><th>Description</th></tr>
+                    <tr><td><code>analyze(fitnessData)</code></td><td>Classify activities and return results struct</td></tr>
+                    <tr><td><code>plotDistribution()</code></td><td>Pie chart of activity distribution</td></tr>
+                    <tr><td><code>plotTimeline()</code></td><td>Activity over time visualization</td></tr>
+                    <tr><td><code>plot()</code></td><td>Default plot (calls plotDistribution)</td></tr>
+                    <tr><td><code>displayResults()</code></td><td>Print activity breakdown to console</td></tr>
+                    <tr><td><code>getResults()</code></td><td>Return results structure</td></tr>
+                </table>
+                
+                <h2>Output Arguments</h2>
+                <table>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><code>predictions</code></td><td>cell array</td><td>Predicted activity for each sample</td></tr>
+                    <tr><td><code>uniqueActivities</code></td><td>cell array</td><td>List of detected activity types</td></tr>
+                    <tr><td><code>activityCounts</code></td><td>double array</td><td>Count of samples per activity</td></tr>
+                    <tr><td><code>activityPercentage</code></td><td>double array</td><td>Percentage breakdown by activity</td></tr>
+                </table>
+                
+                <h2>Activity Types</h2>
+                <table>
+                    <tr><th>Activity</th><th>Description</th></tr>
+                    <tr><td><code>sitting</code></td><td>Low acceleration, minimal movement</td></tr>
+                    <tr><td><code>walking</code></td><td>Moderate, rhythmic acceleration</td></tr>
+                    <tr><td><code>running</code></td><td>High acceleration, faster rhythm</td></tr>
+                </table>
+                
+                <h2>Examples</h2>
+                <h3>Basic Classification</h3>
+                <pre><code><span class="code-comment">% Load activity data</span>
+fitnessData = data.loadFitnessData(<span class="code-string">'data/ActivityLogs.mat'</span>);
+
+<span class="code-comment">% Classify activities</span>
+classifier = analysis.ActivityClassifier();
+results = classifier.analyze(fitnessData);
+
+<span class="code-comment">% Display breakdown</span>
+classifier.displayResults();</code></pre>
+                
+                <h3>Visualization</h3>
+                <pre><code><span class="code-comment">% Create activity visualizations</span>
+classifier = analysis.ActivityClassifier();
+classifier.analyze(fitnessData);
+
+figure(<span class="code-string">'Position'</span>, [100 100 1000 400]);
+
+subplot(1,2,1);
+classifier.plotDistribution();
+
+subplot(1,2,2);
+classifier.plotTimeline();</code></pre>
+                
+                <h3>Training the Model</h3>
+                <pre><code><span class="code-comment">% If model doesn't exist, train it first</span>
+train.trainActivityModel
+
+<span class="code-comment">% Then use the classifier</span>
+classifier = analysis.ActivityClassifier();</code></pre>
+                
+                <h2>Model Details</h2>
+                <p>
+                    The classifier uses a Decision Tree model trained on labeled acceleration data.
+                    Features used for classification are X, Y, and Z acceleration values.
+                    The model file is stored at <code>+analysis/models/activityModel.mat</code>.
+                </p>
+                
+                <h2>See Also</h2>
+                <p>
+                    <a href="AccelerationAnalysis.html">AccelerationAnalysis</a> | 
+                    <a href="StepCounter.html">StepCounter</a> | 
+                    <a href="GPSDistanceCalculator.html">GPSDistanceCalculator</a>
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

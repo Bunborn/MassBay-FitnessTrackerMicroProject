@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPSDistanceCalculator - Fitness Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo">Fitness Tracker</div>
+        <nav><a href="#">Community</a></nav>
+    </header>
+    
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                CONTENTS
+            </div>
+            <nav class="sidebar-nav">
+                <a href="tracker.html">Fitness Tracker</a>
+            </nav>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Packages</div>
+                <nav class="sidebar-nav">
+                    <a href="tracker.html#data">+data</a>
+                    <a href="tracker.html#analysis" class="active">+analysis</a>
+                    <a href="tracker.html#train">+train</a>
+                    <a href="tracker.html#utils">+utils</a>
+                </nav>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Analysis Classes</div>
+                <nav class="sidebar-nav">
+                    <a href="AccelerationAnalysis.html">AccelerationAnalysis</a>
+                    <a href="StepCounter.html">StepCounter</a>
+                    <a href="GPSDistanceCalculator.html" class="active">GPSDistanceCalculator</a>
+                    <a href="ActivityClassifier.html">ActivityClassifier</a>
+                </nav>
+            </div>
+        </aside>
+        
+        <main class="content">
+            <div class="content-tabs">
+                <a href="tracker.html" class="active">Documentation</a>
+                <a href="examples.html">Examples</a>
+                <a href="functions.html">Functions</a>
+            </div>
+            
+            <div class="content-body">
+                <h1 class="page-title">GPSDistanceCalculator</h1>
+                <p class="page-subtitle">Calculate distance from GPS coordinates</p>
+                
+                <p class="page-description">
+                    Computes total distance traveled from GPS latitude/longitude data using the Haversine formula.
+                    Also estimates step count based on configurable stride length.
+                    Inherits from <code>AnalysisFunction</code>.
+                </p>
+                
+                <h2>Syntax</h2>
+                <pre><code>calculator = analysis.GPSDistanceCalculator()
+calculator.StrideLength = 2.5;
+results = calculator.analyze(fitnessData)
+calculator.plotRoute()</code></pre>
+                
+                <h2>Properties</h2>
+                <table>
+                    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+                    <tr><td><code>StrideLength</code></td><td>2.5</td><td>Average stride length in feet</td></tr>
+                    <tr><td><code>EarthCircumference</code></td><td>24901</td><td>Earth circumference in miles</td></tr>
+                </table>
+                
+                <h2>Methods</h2>
+                <table>
+                    <tr><th>Method</th><th>Description</th></tr>
+                    <tr><td><code>analyze(fitnessData)</code></td><td>Calculate distance and return results struct</td></tr>
+                    <tr><td><code>plotRoute()</code></td><td>Plot GPS route on latitude/longitude axes</td></tr>
+                    <tr><td><code>plotSegmentDistances()</code></td><td>Bar chart of distance per GPS segment</td></tr>
+                    <tr><td><code>plot()</code></td><td>Default plot (calls plotRoute)</td></tr>
+                    <tr><td><code>displayResults()</code></td><td>Print distance and steps to console</td></tr>
+                    <tr><td><code>getResults()</code></td><td>Return results structure</td></tr>
+                </table>
+                
+                <h2>Output Arguments</h2>
+                <table>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><code>totalDistanceMiles</code></td><td>double</td><td>Total distance in miles</td></tr>
+                    <tr><td><code>totalDistanceFeet</code></td><td>double</td><td>Total distance in feet</td></tr>
+                    <tr><td><code>estimatedSteps</code></td><td>double</td><td>Estimated steps based on stride length</td></tr>
+                    <tr><td><code>segmentDistances</code></td><td>double array</td><td>Distance for each GPS segment</td></tr>
+                    <tr><td><code>latitude</code></td><td>double array</td><td>Latitude coordinates</td></tr>
+                    <tr><td><code>longitude</code></td><td>double array</td><td>Longitude coordinates</td></tr>
+                    <tr><td><code>numSegments</code></td><td>integer</td><td>Number of GPS segments</td></tr>
+                </table>
+                
+                <h2>Examples</h2>
+                <h3>Basic Distance Calculation</h3>
+                <pre><code><span class="code-comment">% Load data with GPS</span>
+fitnessData = data.loadFitnessData(<span class="code-string">'data/ExampleData.mat'</span>);
+
+<span class="code-comment">% Calculate distance</span>
+calculator = analysis.GPSDistanceCalculator();
+results = calculator.analyze(fitnessData);
+
+fprintf(<span class="code-string">'Distance: %.2f miles\n'</span>, results.totalDistanceMiles);
+fprintf(<span class="code-string">'Estimated steps: %d\n'</span>, results.estimatedSteps);</code></pre>
+                
+                <h3>Adjusting Stride Length</h3>
+                <pre><code><span class="code-comment">% Different stride lengths affect step estimates</span>
+calculator = analysis.GPSDistanceCalculator();
+
+<span class="code-comment">% Short stride (more steps)</span>
+calculator.StrideLength = 2.0;
+results1 = calculator.analyze(fitnessData);
+
+<span class="code-comment">% Long stride (fewer steps)</span>
+calculator.StrideLength = 3.0;
+results2 = calculator.analyze(fitnessData);
+
+<span class="code-comment">% Same distance, different step counts</span>
+fprintf(<span class="code-string">'Short stride: %d steps\n'</span>, results1.estimatedSteps);
+fprintf(<span class="code-string">'Long stride: %d steps\n'</span>, results2.estimatedSteps);</code></pre>
+                
+                <h3>Route Visualization</h3>
+                <pre><code><span class="code-comment">% Plot the GPS route</span>
+calculator = analysis.GPSDistanceCalculator();
+calculator.analyze(fitnessData);
+
+figure;
+subplot(1,2,1);
+calculator.plotRoute();
+
+subplot(1,2,2);
+calculator.plotSegmentDistances();</code></pre>
+                
+                <h2>Algorithm</h2>
+                <p>
+                    Distance is calculated using the Haversine formula, which accounts for Earth's curvature
+                    when computing distances between GPS coordinates. Steps are estimated by dividing 
+                    total distance (in feet) by stride length.
+                </p>
+                
+                <h2>See Also</h2>
+                <p>
+                    <a href="AccelerationAnalysis.html">AccelerationAnalysis</a> | 
+                    <a href="StepCounter.html">StepCounter</a> | 
+                    <a href="ActivityClassifier.html">ActivityClassifier</a>
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

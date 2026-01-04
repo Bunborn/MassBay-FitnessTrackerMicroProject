@@ -3,332 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker API Documentation</title>
-    <style>
-        :root {
-            --primary: #0076a8;
-            --secondary: #e16b2c;
-            --bg: #f8f9fa;
-            --text: #2d3436;
-            --code-bg: #1e1e1e;
-            --border: #dee2e6;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--bg);
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        header {
-            background: linear-gradient(135deg, var(--primary), #004a6e);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        header p { opacity: 0.9; font-size: 1.1rem; }
-        nav {
-            background: white;
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        nav ul { list-style: none; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-        nav a { color: var(--primary); text-decoration: none; font-weight: 500; }
-        nav a:hover { text-decoration: underline; }
-        .section { background: white; border-radius: 8px; padding: 2rem; margin: 2rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h2 { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
-        h3 { color: var(--secondary); margin: 1.5rem 0 1rem; }
-        h4 { margin: 1rem 0 0.5rem; color: #555; }
-        .class-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            background: #fafafa;
-        }
-        .class-card h3 { margin-top: 0; }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-right: 0.5rem;
-        }
-        .badge-class { background: #e3f2fd; color: #1565c0; }
-        .badge-function { background: #e8f5e9; color: #2e7d32; }
-        .badge-property { background: #fff3e0; color: #e65100; }
-        pre {
-            background: var(--code-bg);
-            color: #d4d4d4;
-            padding: 1rem;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: 'Fira Code', 'Consolas', monospace;
-            font-size: 0.9rem;
-            margin: 1rem 0;
-        }
-        code {
-            background: #e9ecef;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'Fira Code', 'Consolas', monospace;
-            font-size: 0.9em;
-        }
-        pre code { background: none; padding: 0; }
-        .keyword { color: #569cd6; }
-        .string { color: #ce9178; }
-        .comment { color: #6a9955; }
-        .function { color: #dcdcaa; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: #f1f3f4; font-weight: 600; }
-        .method-sig { font-family: monospace; background: #e9ecef; padding: 0.5rem; border-radius: 4px; }
-        footer { text-align: center; padding: 2rem; color: #666; }
-    </style>
+    <title>Fitness Tracker Documentation</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>🏃 Fitness Tracker API</h1>
-        <p>MATLAB Analysis Classes for Accelerometer, GPS, and Activity Classification</p>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="logo">Fitness Tracker</div>
+        <nav>
+            <a href="#">Community</a>
+        </nav>
     </header>
     
-    <nav>
-        <ul>
-            <li><a href="#quickstart">Quick Start</a></li>
-            <li><a href="#data">Data Loading</a></li>
-            <li><a href="#analysis">Analysis Classes</a></li>
-            <li><a href="#training">Model Training</a></li>
-            <li><a href="#utilities">Utilities</a></li>
-        </ul>
-    </nav>
-    
-    <div class="container">
-        <section id="quickstart" class="section">
-            <h2>Quick Start</h2>
-            <pre><code><span class="comment">% Add tracker to path</span>
-<span class="function">addpath</span>(<span class="string">'tracker'</span>);
+    <div class="main-layout">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                CONTENTS
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active">Fitness Tracker</a>
+            </nav>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Packages</div>
+                <nav class="sidebar-nav">
+                    <a href="#data">+data</a>
+                    <a href="#analysis">+analysis</a>
+                    <a href="#train">+train</a>
+                    <a href="#utils">+utils</a>
+                </nav>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Analysis Classes</div>
+                <nav class="sidebar-nav">
+                    <a href="AccelerationAnalysis.html">AccelerationAnalysis</a>
+                    <a href="StepCounter.html">StepCounter</a>
+                    <a href="GPSDistanceCalculator.html">GPSDistanceCalculator</a>
+                    <a href="ActivityClassifier.html">ActivityClassifier</a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-tabs">
+                <a href="tracker.html" class="active">Documentation</a>
+                <a href="examples.html">Examples</a>
+                <a href="functions.html">Functions</a>
+            </div>
+            
+            <div class="content-body">
+                <h1 class="page-title">Fitness Tracker</h1>
+                <p class="page-subtitle">Analyze fitness data using MATLAB<sup>®</sup> functions</p>
+                
+                <p class="page-description">
+                    Load and analyze accelerometer and GPS data from MATLAB Mobile. Compute step counts, 
+                    distances, and classify activities using machine learning.
+                </p>
+                
+                <!-- Architecture Overview -->
+                <div class="section-header" onclick="toggleSection(this)">
+                    <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <h3>Architecture Overview</h3>
+                </div>
+                <div class="section-content">
+                    <p style="margin-bottom: 20px;">
+                        The Fitness Tracker is organized into four MATLAB packages, each with a specific responsibility:
+                    </p>
+                    
+                    <table>
+                        <tr>
+                            <th>Package</th>
+                            <th>Purpose</th>
+                            <th>Contents</th>
+                        </tr>
+                        <tr>
+                            <td><code>+data</code></td>
+                            <td><strong>Data Loading &amp; Cleaning</strong></td>
+                            <td>Functions to load raw sensor data from .mat files, validate structure, and prepare timetables for analysis</td>
+                        </tr>
+                        <tr>
+                            <td><code>+analysis</code></td>
+                            <td><strong>Analysis Functions</strong></td>
+                            <td>Classes that implement the <code>AnalysisFunction</code> interface for processing fitness data (step counting, distance calculation, activity classification)</td>
+                        </tr>
+                        <tr>
+                            <td><code>+train</code></td>
+                            <td><strong>Offline Model Training</strong></td>
+                            <td>Scripts to train machine learning models from labeled data; models are saved and used by analysis classes at runtime</td>
+                        </tr>
+                        <tr>
+                            <td><code>+utils</code></td>
+                            <td><strong>Helper Functions</strong></td>
+                            <td>Utility functions shared across packages (e.g., time conversions)</td>
+                        </tr>
+                    </table>
+                    
+                    <h4 class="subsection">Data Flow</h4>
+                    <pre><code><span class="code-comment">% 1. Load raw data</span>
+fitnessData = data.loadFitnessData(<span class="code-string">'ExampleData.mat'</span>);
 
-<span class="comment">% Load fitness data</span>
-fitnessData = data.<span class="function">loadFitnessData</span>(<span class="string">'data/ExampleData.mat'</span>);
+<span class="code-comment">% 2. Create an analysis object</span>
+analyzer = analysis.StepCounter();
 
-<span class="comment">% Run step counter analysis</span>
-stepCounter = analysis.<span class="function">StepCounter</span>();
-stepCounter.Threshold = 1.2;
-results = stepCounter.<span class="function">analyze</span>(fitnessData);
-stepCounter.<span class="function">plotSteps</span>();</code></pre>
-        </section>
-        
-        <section id="data" class="section">
-            <h2>Data Loading</h2>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-function">function</span> data.loadFitnessData</h3>
-                <p>Loads and validates fitness data from .mat files.</p>
+<span class="code-comment">% 3. Run analysis</span>
+results = analyzer.analyze(fitnessData);
+
+<span class="code-comment">% 4. Visualize results</span>
+analyzer.plot();</code></pre>
+                    
+                    <h4 class="subsection">AnalysisFunction Interface</h4>
+                    <p style="margin-bottom: 10px;">
+                        All analysis classes inherit from <code>AnalysisFunction</code> and implement a common interface:
+                    </p>
+                    <table>
+                        <tr><th>Method</th><th>Description</th></tr>
+                        <tr><td><code>analyze(fitnessData)</code></td><td>Process data and return results struct</td></tr>
+                        <tr><td><code>plot()</code></td><td>Generate default visualization</td></tr>
+                        <tr><td><code>displayResults()</code></td><td>Print summary to command window</td></tr>
+                        <tr><td><code>getResults()</code></td><td>Retrieve results struct</td></tr>
+                    </table>
+                    <p style="margin-top: 10px; color: var(--text-secondary); font-size: 13px;">
+                        This consistent interface allows you to swap analysis classes without changing your workflow.
+                    </p>
+                </div>
                 
-                <h4>Syntax</h4>
-                <div class="method-sig">fitnessData = data.loadFitnessData(dataPath)</div>
-                <div class="method-sig">fitnessData = data.loadFitnessData(dataPath, 'ValidateData', false)</div>
+                <!-- Quick Start -->
+                <div class="section-header" onclick="toggleSection(this)">
+                    <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <h3>Quick Start</h3>
+                </div>
+                <div class="section-content">
+                    <pre><code><span class="code-comment">% Setup paths</span>
+setupPaths();
+
+<span class="code-comment">% Load fitness data</span>
+fitnessData = data.loadFitnessData(<span class="code-string">'data/ExampleData.mat'</span>);
+
+<span class="code-comment">% Count steps</span>
+stepCounter = analysis.StepCounter();
+results = stepCounter.analyze(fitnessData);
+stepCounter.plotSteps();</code></pre>
+                </div>
                 
-                <h4>Parameters</h4>
-                <table>
-                    <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-                    <tr><td><code>dataPath</code></td><td>string</td><td>Path to .mat file</td></tr>
-                    <tr><td><code>ValidateData</code></td><td>logical</td><td>Validate and structure data (default: true)</td></tr>
-                </table>
+                <!-- Data Package -->
+                <div class="section-header" onclick="toggleSection(this)" id="data">
+                    <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <h3>Data Loading (+data)</h3>
+                </div>
+                <div class="section-content">
+                    <ul class="item-list">
+                        <li>
+                            <a href="#" class="item-name">loadFitnessData</a>
+                            <div class="item-desc">Load and validate fitness data from .mat files</div>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="subsection">Syntax</h4>
+                    <pre><code>fitnessData = data.loadFitnessData(dataPath)
+fitnessData = data.loadFitnessData(dataPath, <span class="code-string">'ValidateData'</span>, <span class="code-keyword">false</span>)</code></pre>
+                    
+                    <h4 class="subsection">Output Fields</h4>
+                    <table>
+                        <tr><th>Field</th><th>Description</th></tr>
+                        <tr><td><code>Acceleration</code></td><td>Timetable with X, Y, Z acceleration</td></tr>
+                        <tr><td><code>Position</code></td><td>Timetable with latitude, longitude</td></tr>
+                        <tr><td><code>hasAcceleration</code></td><td>True if acceleration data present</td></tr>
+                        <tr><td><code>hasPosition</code></td><td>True if GPS data present</td></tr>
+                    </table>
+                </div>
                 
-                <h4>Returns</h4>
-                <table>
-                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
-                    <tr><td><code>hasAcceleration</code></td><td>logical</td><td>True if acceleration data present</td></tr>
-                    <tr><td><code>hasPosition</code></td><td>logical</td><td>True if GPS position data present</td></tr>
-                    <tr><td><code>hasOrientation</code></td><td>logical</td><td>True if orientation data present</td></tr>
-                    <tr><td><code>Acceleration</code></td><td>timetable</td><td>X, Y, Z acceleration (if present)</td></tr>
-                    <tr><td><code>Position</code></td><td>timetable</td><td>latitude, longitude (if present)</td></tr>
-                </table>
+                <!-- Analysis Package -->
+                <div class="section-header" onclick="toggleSection(this)" id="analysis">
+                    <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <h3>Analysis Classes (+analysis)</h3>
+                </div>
+                <div class="section-content">
+                    <p style="margin-bottom: 15px; color: var(--text-secondary);">
+                        All classes inherit from <code>AnalysisFunction</code> with methods: 
+                        <code>analyze()</code>, <code>plot()</code>, <code>displayResults()</code>
+                    </p>
+                    
+                    <ul class="item-list">
+                        <li>
+                            <a href="AccelerationAnalysis.html" class="item-name">AccelerationAnalysis</a>
+                            <div class="item-desc">Compute acceleration magnitude and statistics</div>
+                        </li>
+                        <li>
+                            <a href="StepCounter.html" class="item-name">StepCounter</a>
+                            <div class="item-desc">Detect steps using peak detection on acceleration</div>
+                        </li>
+                        <li>
+                            <a href="GPSDistanceCalculator.html" class="item-name">GPSDistanceCalculator</a>
+                            <div class="item-desc">Calculate distance from GPS coordinates</div>
+                        </li>
+                        <li>
+                            <a href="ActivityClassifier.html" class="item-name">ActivityClassifier</a>
+                            <div class="item-desc">ML-based activity classification (sitting, walking, running)</div>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="subsection">StepCounter Properties</h4>
+                    <table>
+                        <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+                        <tr><td><code>Threshold</code></td><td>1.2</td><td>Minimum peak height for step detection</td></tr>
+                        <tr><td><code>MinPeakDistance</code></td><td>0.5</td><td>Minimum time between peaks (seconds)</td></tr>
+                    </table>
+                    
+                    <h4 class="subsection">GPSDistanceCalculator Properties</h4>
+                    <table>
+                        <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+                        <tr><td><code>StrideLength</code></td><td>2.5</td><td>Average stride length (feet)</td></tr>
+                        <tr><td><code>EarthCircumference</code></td><td>24901</td><td>Earth circumference (miles)</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Train Package -->
+                <div class="section-header" onclick="toggleSection(this)" id="train">
+                    <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <h3>Model Training (+train)</h3>
+                </div>
+                <div class="section-content">
+                    <ul class="item-list">
+                        <li>
+                            <a href="#" class="item-name">trainActivityModel</a>
+                            <div class="item-desc">Train and save ML model for activity classification</div>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="subsection">Usage</h4>
+                    <pre><code><span class="code-comment">% Run training script</span>
+train.trainActivityModel</code></pre>
+                    <p style="margin-top: 10px; color: var(--text-secondary); font-size: 13px;">
+                        Saves model to <code>+analysis/models/activityModel.mat</code>
+                    </p>
+                </div>
+                
+                <!-- Utils Package -->
+                <div class="section-header" onclick="toggleSection(this)" id="utils">
+                    <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <h3>Utilities (+utils)</h3>
+                </div>
+                <div class="section-content">
+                    <ul class="item-list">
+                        <li>
+                            <a href="#" class="item-name">timeElapsed</a>
+                            <div class="item-desc">Convert datetime array to elapsed seconds</div>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="subsection">Syntax</h4>
+                    <pre><code>elapsed = utils.timeElapsed(timestamps)</code></pre>
+                </div>
+                
             </div>
-        </section>
-        
-        <section id="analysis" class="section">
-            <h2>Analysis Classes</h2>
-            <p>All analysis classes inherit from <code>analysis.AnalysisFunction</code> and implement a common interface.</p>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-class">class</span> analysis.AnalysisFunction</h3>
-                <p>Abstract base class defining the analysis interface.</p>
-                
-                <h4>Properties (Constant)</h4>
-                <table>
-                    <tr><th>Property</th><th>Description</th></tr>
-                    <tr><td><code>Name</code></td><td>Display name of the analysis</td></tr>
-                    <tr><td><code>Description</code></td><td>Brief description</td></tr>
-                </table>
-                
-                <h4>Methods</h4>
-                <table>
-                    <tr><th>Method</th><th>Description</th></tr>
-                    <tr><td><code>analyze(fitnessData)</code></td><td>Run analysis, returns results struct</td></tr>
-                    <tr><td><code>displayResults()</code></td><td>Print results to console</td></tr>
-                    <tr><td><code>plot()</code></td><td>Generate default visualization</td></tr>
-                    <tr><td><code>getResults()</code></td><td>Get results structure</td></tr>
-                </table>
-            </div>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-class">class</span> analysis.AccelerationAnalysis</h3>
-                <p>Computes acceleration magnitude and statistics from X, Y, Z accelerometer data.</p>
-                
-                <h4>Results</h4>
-                <table>
-                    <tr><th>Field</th><th>Description</th></tr>
-                    <tr><td><code>magnitude</code></td><td>Computed acceleration magnitude √(X² + Y² + Z²)</td></tr>
-                    <tr><td><code>X, Y, Z</code></td><td>Individual axis data</td></tr>
-                    <tr><td><code>timeData</code></td><td>Timestamps</td></tr>
-                    <tr><td><code>stats</code></td><td>Struct with mean, std, max, min, median</td></tr>
-                </table>
-                
-                <h4>Plot Methods</h4>
-                <table>
-                    <tr><th>Method</th><th>Description</th></tr>
-                    <tr><td><code>plotMagnitude()</code></td><td>Plot acceleration magnitude over time</td></tr>
-                    <tr><td><code>plotComponents()</code></td><td>Plot X, Y, Z components</td></tr>
-                </table>
-                
-                <h4>Example</h4>
-                <pre><code>accel = analysis.<span class="function">AccelerationAnalysis</span>();
-results = accel.<span class="function">analyze</span>(fitnessData);
-accel.<span class="function">plotMagnitude</span>();
-<span class="function">fprintf</span>(<span class="string">'Mean: %.2f\n'</span>, results.stats.mean);</code></pre>
-            </div>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-class">class</span> analysis.StepCounter</h3>
-                <p>Estimates step count using peak detection on acceleration magnitude.</p>
-                
-                <h4>Properties</h4>
-                <table>
-                    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
-                    <tr><td><code>Threshold</code></td><td>1.2</td><td>Minimum peak height for step detection</td></tr>
-                    <tr><td><code>MinPeakDistance</code></td><td>0.5</td><td>Minimum samples between peaks</td></tr>
-                </table>
-                
-                <h4>Results</h4>
-                <table>
-                    <tr><th>Field</th><th>Description</th></tr>
-                    <tr><td><code>stepCount</code></td><td>Total detected steps</td></tr>
-                    <tr><td><code>peakLocations</code></td><td>Indices of detected peaks</td></tr>
-                    <tr><td><code>peakValues</code></td><td>Magnitude at each peak</td></tr>
-                    <tr><td><code>magnitude</code></td><td>Full magnitude signal</td></tr>
-                </table>
-                
-                <h4>Example</h4>
-                <pre><code>steps = analysis.<span class="function">StepCounter</span>();
-steps.Threshold = 1.5;  <span class="comment">% Adjust sensitivity</span>
-results = steps.<span class="function">analyze</span>(fitnessData);
-steps.<span class="function">plotSteps</span>();</code></pre>
-            </div>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-class">class</span> analysis.GPSDistanceCalculator</h3>
-                <p>Calculates distance traveled from GPS latitude/longitude data.</p>
-                
-                <h4>Properties</h4>
-                <table>
-                    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
-                    <tr><td><code>StrideLength</code></td><td>2.5</td><td>Average stride length in feet</td></tr>
-                    <tr><td><code>EarthCircumference</code></td><td>24901</td><td>Earth circumference in miles</td></tr>
-                </table>
-                
-                <h4>Results</h4>
-                <table>
-                    <tr><th>Field</th><th>Description</th></tr>
-                    <tr><td><code>totalDistanceMiles</code></td><td>Total distance in miles</td></tr>
-                    <tr><td><code>totalDistanceFeet</code></td><td>Total distance in feet</td></tr>
-                    <tr><td><code>estimatedSteps</code></td><td>Steps estimated from distance</td></tr>
-                    <tr><td><code>segmentDistances</code></td><td>Distance for each GPS segment</td></tr>
-                </table>
-                
-                <h4>Plot Methods</h4>
-                <table>
-                    <tr><th>Method</th><th>Description</th></tr>
-                    <tr><td><code>plotRoute()</code></td><td>Plot GPS route on map</td></tr>
-                    <tr><td><code>plotSegmentDistances()</code></td><td>Bar chart of segment distances</td></tr>
-                </table>
-            </div>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-class">class</span> analysis.ActivityClassifier</h3>
-                <p>ML-based classification of activities (walking, running, sitting).</p>
-                <p><strong>Note:</strong> Requires trained model. Run <code>train.trainActivityModel</code> first.</p>
-                
-                <h4>Results</h4>
-                <table>
-                    <tr><th>Field</th><th>Description</th></tr>
-                    <tr><td><code>predictions</code></td><td>Predicted activity for each sample</td></tr>
-                    <tr><td><code>uniqueActivities</code></td><td>List of detected activities</td></tr>
-                    <tr><td><code>activityCounts</code></td><td>Count per activity type</td></tr>
-                    <tr><td><code>activityPercentages</code></td><td>Percentage breakdown</td></tr>
-                </table>
-                
-                <h4>Plot Methods</h4>
-                <table>
-                    <tr><th>Method</th><th>Description</th></tr>
-                    <tr><td><code>plotDistribution()</code></td><td>Pie chart of activity distribution</td></tr>
-                    <tr><td><code>plotTimeline()</code></td><td>Activity over time</td></tr>
-                </table>
-            </div>
-        </section>
-        
-        <section id="training" class="section">
-            <h2>Model Training</h2>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-function">function</span> train.trainActivityModel</h3>
-                <p>Trains and saves the ML model for activity classification.</p>
-                
-                <h4>Usage</h4>
-                <pre><code><span class="comment">% Run from tracker folder</span>
-train.<span class="function">trainActivityModel</span></code></pre>
-                
-                <p>The trained model is saved to <code>tracker/+analysis/models/activityModel.mat</code></p>
-            </div>
-        </section>
-        
-        <section id="utilities" class="section">
-            <h2>Utilities</h2>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-function">function</span> utils.timeElapsed</h3>
-                <p>Converts datetime array to elapsed seconds from start.</p>
-                
-                <h4>Syntax</h4>
-                <div class="method-sig">elapsed = utils.timeElapsed(timestamps)</div>
-                
-                <h4>Example</h4>
-                <pre><code>timestamps = fitnessData.Acceleration.Properties.RowTimes;
-elapsed = utils.<span class="function">timeElapsed</span>(timestamps);</code></pre>
-            </div>
-            
-            <div class="class-card">
-                <h3><span class="badge badge-function">function</span> runAnalysis</h3>
-                <p>Orchestrator function that loads data and runs analysis in one call.</p>
-                
-                <h4>Syntax</h4>
-                <div class="method-sig">results = runAnalysis(dataPath, analysisFunction)</div>
-                
-                <h4>Example</h4>
-                <pre><code>results = <span class="function">runAnalysis</span>(<span class="string">'data/ExampleData.mat'</span>, analysis.<span class="function">StepCounter</span>());</code></pre>
-            </div>
-        </section>
+        </main>
     </div>
     
-    <footer>
-        <p>Fitness Tracker API Documentation | MATLAB</p>
-    </footer>
+    <script>
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const content = header.nextElementSibling;
+            content.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>
