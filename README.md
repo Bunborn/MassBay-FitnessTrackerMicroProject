@@ -15,16 +15,16 @@ A modular fitness tracker for analyzing accelerometer and GPS data from MATLAB M
 setupPaths();
 
 % Load fitness data
-fitnessData = loadFitnessData('data/ExampleData.mat');
+fitnessData = data.loadFitnessData('data/ExampleData.mat');
 
 % Analyze acceleration and count steps
-stepCounter = StepCounter();
+stepCounter = analysis.StepCounter();
 stepCounter.Threshold = 1.2;
 results = stepCounter.analyze(fitnessData);
 stepCounter.plotSteps();
 
 % Calculate distance from GPS
-gpsCalc = GPSDistanceCalculator();
+gpsCalc = analysis.GPSDistanceCalculator();
 gpsCalc.analyze(fitnessData);
 gpsCalc.plotRoute();
 ```
@@ -37,10 +37,10 @@ See `fitnessTrackerDemo.m` for a complete walkthrough with visualizations.
 ├── setupPaths.m             # Path setup helper
 ├── fitnessTrackerDemo.m     # Interactive demo script
 ├── tracker/                 # Product code
-│   ├── analysis/            # Analysis classes
-│   ├── dataloading/         # Data loading
-│   ├── modeltraining/       # ML model training
-│   ├── utilities/           # Utilities
+│   ├── +analysis/           # Analysis classes
+│   ├── +data/               # Data loading
+│   ├── +train/              # ML model training
+│   ├── +utils/              # Utilities
 │   └── ARCHITECTURE.md      # Technical documentation
 ├── data/                    # Sample data files
 ├── docs/                    # Examples and API docs
@@ -53,10 +53,10 @@ See `fitnessTrackerDemo.m` for a complete walkthrough with visualizations.
 
 | Class | Description |
 |-------|-------------|
-| `AccelerationAnalysis` | Magnitude and statistics from X,Y,Z accelerometer |
-| `StepCounter` | Peak detection step counting |
-| `GPSDistanceCalculator` | Distance from GPS coordinates |
-| `ActivityClassifier` | ML classification (walking, running, sitting) |
+| `analysis.AccelerationAnalysis` | Magnitude and statistics from X,Y,Z accelerometer |
+| `analysis.StepCounter` | Peak detection step counting |
+| `analysis.GPSDistanceCalculator` | Distance from GPS coordinates |
+| `analysis.ActivityClassifier` | ML classification (walking, running, sitting) |
 
 ## Course Materials
 

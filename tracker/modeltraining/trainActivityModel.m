@@ -4,7 +4,6 @@
 % The trained model is saved for use by the ActivityClassifier class.
 
 %% Load Training Data
-clear
 load('data/ActivityLogs.mat');
 
 %% Prepare Training Data

@@ -37,12 +37,18 @@ classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
             analyzer = AccelerationAnalysis();
             analyzer.analyze(fitnessData);
             
+            % Get current figure handles for cleanup
+            figHandlesBefore = findall(0, 'Type', 'figure');
+            
             % Test all plot methods
             testCase.verifyWarningFree(@() analyzer.plotMagnitude());
             testCase.verifyWarningFree(@() analyzer.plotComponents());
             testCase.verifyWarningFree(@() analyzer.plot());
             
-            close all;
+            % Clean up only figures created by this test
+            figHandlesAfter = findall(0, 'Type', 'figure');
+            newFigs = setdiff(figHandlesAfter, figHandlesBefore);
+            testCase.addTeardown(@() close(newFigs));
         end
     end
 end

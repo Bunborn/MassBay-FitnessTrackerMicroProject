@@ -41,11 +41,17 @@ classdef GPSDistanceCalculatorTest < AbstractFitnessTrackerTest
             gpsCalc = GPSDistanceCalculator();
             gpsCalc.analyze(fitnessData);
             
+            % Get current figure handles for cleanup
+            figHandlesBefore = findall(0, 'Type', 'figure');
+            
             % Test all plot methods
             testCase.verifyWarningFree(@() gpsCalc.plotRoute());
             testCase.verifyWarningFree(@() gpsCalc.plotSegmentDistances());
             
-            close all;
+            % Clean up only figures created by this test
+            figHandlesAfter = findall(0, 'Type', 'figure');
+            newFigs = setdiff(figHandlesAfter, figHandlesBefore);
+            testCase.addTeardown(@() close(newFigs));
         end
         
         function testDifferentStrideLengths(testCase)

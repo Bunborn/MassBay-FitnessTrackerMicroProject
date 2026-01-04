@@ -2,6 +2,7 @@ classdef TimeElapsedTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testUtilsTimeElapsed(testCase)
+            % Test basic elapsed time calculation from datetime array
             testTimes = datetime(2024, 1, 1, 12, 0, [0 5 10 15 20]);
             
             elapsed = timeElapsed(testTimes);
@@ -12,6 +13,7 @@ classdef TimeElapsedTest < AbstractFitnessTrackerTest
         end
         
         function testTimeElapsedWithMinuteRollover(testCase)
+            % Test that minute rollovers (59->0 seconds) are handled correctly
             testTimes = datetime(2024, 1, 1, 12, 0, [55 56 57 58 59 0 1]);
             
             elapsed = timeElapsed(testTimes);
@@ -21,6 +23,7 @@ classdef TimeElapsedTest < AbstractFitnessTrackerTest
         end
         
         function testTimeElapsedSingleValue(testCase)
+            % Test edge case: single datetime value should return 0
             testTimes = datetime(2024, 1, 1, 12, 0, 30);
             
             elapsed = timeElapsed(testTimes);
