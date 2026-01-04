@@ -4,7 +4,7 @@
 A modular MATLAB fitness tracker featuring acceleration analysis, step counting, GPS distance calculation, and ML-based activity classification.
 
 ## Design Principles
-1. **Separation of Concerns**: Data, analysis, training, and utilities in distinct packages
+1. **Separation of Concerns**: Data, analysis, training, and utilities in distinct modules
 2. **Interface-Based Design**: Analysis functions implement a common interface
 3. **Testability**: All components independently testable with MATLAB Test
 4. **Extensibility**: Add new analysis functions without modifying existing code
@@ -14,20 +14,18 @@ A modular MATLAB fitness tracker featuring acceleration analysis, step counting,
 ```
 MassBay-FitnessTrackerMicroProject/
 ├── tracker/                    # Product code
-│   ├── +analysis/              # Analysis implementations
+│   ├── analysis/               # Analysis implementations
 │   │   ├── AnalysisFunction.m  # Abstract base class
 │   │   ├── AccelerationAnalysis.m
 │   │   ├── StepCounter.m
 │   │   ├── GPSDistanceCalculator.m
 │   │   └── ActivityClassifier.m
-│   ├── +data/                  # Data loading
+│   ├── dataloading/            # Data loading
 │   │   └── loadFitnessData.m
-│   ├── +train/                 # Model training
+│   ├── modeltraining/          # Model training
 │   │   └── trainActivityModel.m
-│   ├── +utils/                 # Utilities
-│   │   └── timeElapsed.m
-│   ├── exampleUsage.m          # Usage examples
-│   └── runAnalysis.m           # Orchestrator function
+│   └── utilities/              # Utilities
+│       └── timeElapsed.m
 ├── data/                       # Data files
 │   ├── ExampleData.mat
 │   └── ActivityLogs.mat
@@ -41,9 +39,9 @@ MassBay-FitnessTrackerMicroProject/
 
 ## Core Components
 
-### 1. Data Loading (`+data` package)
+### 1. Data Loading
 
-#### `data.loadFitnessData(dataPath, options)`
+#### `loadFitnessData(dataPath, options)`
 Loads fitness data from .mat files with validation.
 
 **Parameters:**
@@ -58,12 +56,12 @@ Loads fitness data from .mat files with validation.
 
 **Example:**
 ```matlab
-fitnessData = data.loadFitnessData("data/ExampleData.mat");
+fitnessData = loadFitnessData("data/ExampleData.mat");
 ```
 
-### 2. Analysis Interface (`+analysis` package)
+### 2. Analysis Interface
 
-#### `analysis.AnalysisFunction` (Abstract Base Class)
+#### `AnalysisFunction` (Abstract Base Class)
 Defines the contract that all analysis functions must implement.
 
 **Properties:**
@@ -78,14 +76,14 @@ Defines the contract that all analysis functions must implement.
 
 ### 3. Built-in Analysis Functions
 
-#### `analysis.AccelerationAnalysis`
+#### `AccelerationAnalysis`
 Computes acceleration magnitude and statistics.
 
 **Results:** `magnitude`, `X`, `Y`, `Z`, `timeData`, `stats` (mean, std, max, min, median)
 
 **Plot Methods:** `plotMagnitude()`, `plotComponents()`
 
-#### `analysis.StepCounter`
+#### `StepCounter`
 Estimates step count using peak detection on acceleration magnitude.
 
 **Properties:** `Threshold` (default: 1.2), `MinPeakDistance` (default: 0.5)
@@ -94,7 +92,7 @@ Estimates step count using peak detection on acceleration magnitude.
 
 **Plot Methods:** `plotSteps()`
 
-#### `analysis.GPSDistanceCalculator`
+#### `GPSDistanceCalculator`
 Calculates distance traveled from GPS coordinates.
 
 **Properties:** `StrideLength` (default: 2.5 ft)
@@ -103,7 +101,7 @@ Calculates distance traveled from GPS coordinates.
 
 **Plot Methods:** `plotRoute()`, `plotSegmentDistances()`
 
-#### `analysis.ActivityClassifier`
+#### `ActivityClassifier`
 ML-based activity classification (walking, running, sitting).
 
 **Results:** `predictions`, `uniqueActivities`, `activityCounts`, `activityPercentages`
@@ -116,36 +114,36 @@ ML-based activity classification (walking, running, sitting).
 Coordinates data loading and analysis execution.
 
 ```matlab
-results = runAnalysis("data/ExampleData.mat", analysis.StepCounter());
+results = runAnalysis("data/ExampleData.mat", StepCounter());
 ```
 
 ## Usage Examples
 
 ```matlab
-% Add tracker to path
-addpath('tracker');
+% Setup paths
+setupPaths();
 
 % Load data
-fitnessData = data.loadFitnessData("data/ExampleData.mat");
+fitnessData = loadFitnessData("data/ExampleData.mat");
 
 % Acceleration analysis
-accel = analysis.AccelerationAnalysis();
+accel = AccelerationAnalysis();
 accel.analyze(fitnessData);
 accel.plotMagnitude();
 
 % Step counting
-steps = analysis.StepCounter();
+steps = StepCounter();
 steps.Threshold = 1.2;
 results = steps.analyze(fitnessData);
 steps.plotSteps();
 
 % GPS distance
-gps = analysis.GPSDistanceCalculator();
+gps = GPSDistanceCalculator();
 gps.analyze(fitnessData);
 gps.plotRoute();
 
 % Activity classification (requires trained model)
-classifier = analysis.ActivityClassifier();
+classifier = ActivityClassifier();
 classifier.analyze(fitnessData);
 classifier.plotDistribution();
 ```
@@ -159,7 +157,7 @@ table(results)
 
 ## Adding New Analysis Functions
 
-1. Create class in `tracker/+analysis/` inheriting from `AnalysisFunction`
+1. Create class in `tracker/analysis/` inheriting from `AnalysisFunction`
 2. Define `Name` and `Description` constant properties
 3. Implement `analyze(obj, fitnessData)` method
 4. Add plot methods as needed
