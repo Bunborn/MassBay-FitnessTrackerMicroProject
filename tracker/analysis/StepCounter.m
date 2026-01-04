@@ -6,7 +6,7 @@ classdef StepCounter < AnalysisFunction
     end
     
     properties
-        Threshold = 1.2
+        Threshold = 15
         MinPeakDistance = 0.5
     end
     

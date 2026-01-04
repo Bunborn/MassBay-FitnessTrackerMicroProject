@@ -82,7 +82,7 @@ classdef ActivityClassifier < AnalysisFunction
             predictionsCat = categorical(cellstr(obj.results.predictions));
             pie(ax, predictionsCat);
             title(ax, 'Predicted Activity Distribution');
-            legend(ax, obj.results.uniqueActivities);
+            legend(ax, obj.results.uniqueActivities, 'Location', 'eastoutside');
         end
         
         function plotTimeline(obj, target)

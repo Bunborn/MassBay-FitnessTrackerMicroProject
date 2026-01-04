@@ -13,4 +13,5 @@ function projectRoot = setupPaths()
     addpath(fullfile(projectRoot, 'tracker', 'modeltraining'));
     addpath(fullfile(projectRoot, 'tracker', 'utilities'));
     addpath(fullfile(projectRoot, 'tests'));
+    addpath(fullfile(projectRoot, 'dashboard'));
 end

@@ -10,6 +10,22 @@ A modular fitness tracker for analyzing accelerometer and GPS data from MATLAB M
 
 ## Quick Start
 
+### Interactive Dashboard (Recommended)
+
+```matlab
+% Launch the interactive dashboard
+launchDashboard
+```
+
+The dashboard provides a modern UI for:
+- Loading and analyzing data files
+- Real-time step counting with adjustable sensitivity
+- Activity classification visualization
+- GPS route mapping
+- Acceleration analysis
+
+### Programmatic Usage
+
 ```matlab
 % Setup paths
 setupPaths();
@@ -36,6 +52,10 @@ See `fitnessTrackerDemo.m` for a complete walkthrough with visualizations.
 ```
 ├── setupPaths.m             # Path setup helper
 ├── fitnessTrackerDemo.m     # Interactive demo script
+├── launchDashboard.m        # Dashboard launcher script
+├── dashboard/               # Interactive dashboard app
+│   ├── FitnessTrackerDashboard.m  # Main app
+│   └── README.md            # Dashboard documentation
 ├── tracker/                 # Product code
 │   ├── +analysis/           # Analysis classes
 │   ├── +data/               # Data loading
