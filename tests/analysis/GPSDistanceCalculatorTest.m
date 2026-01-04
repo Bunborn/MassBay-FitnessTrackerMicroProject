@@ -2,14 +2,14 @@ classdef GPSDistanceCalculatorTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testGPSDistanceCalculation(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
             end
             
-            calculator = analysis.GPSDistanceCalculator();
-            results = calculator.analyze(fitnessData);
+            gpsCalc = GPSDistanceCalculator();
+            results = gpsCalc.analyze(fitnessData);
             
             testCase.verifyClass(results, 'struct');
             testCase.verifyTrue(isfield(results, 'totalDistanceMiles'));
@@ -20,25 +20,25 @@ classdef GPSDistanceCalculatorTest < AbstractFitnessTrackerTest
         end
         
         function testGPSDistanceProperties(testCase)
-            calculator = analysis.GPSDistanceCalculator();
+            gpsCalc = GPSDistanceCalculator();
             
-            testCase.verifyEqual(calculator.StrideLength, 2.5);
-            testCase.verifyEqual(calculator.EarthCircumference, 24901);
+            testCase.verifyEqual(gpsCalc.StrideLength, 2.5);
+            testCase.verifyEqual(gpsCalc.EarthCircumference, 24901);
             
             % Test property modification
-            calculator.StrideLength = 3.0;
-            testCase.verifyEqual(calculator.StrideLength, 3.0);
+            gpsCalc.StrideLength = 3.0;
+            testCase.verifyEqual(gpsCalc.StrideLength, 3.0);
         end
         
         function testGPSDistanceResults(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
             end
             
-            calculator = analysis.GPSDistanceCalculator();
-            results = calculator.analyze(fitnessData);
+            gpsCalc = GPSDistanceCalculator();
+            results = gpsCalc.analyze(fitnessData);
             
             testCase.verifyTrue(isfield(results, 'segmentDistances'));
             testCase.verifyTrue(isfield(results, 'latitude'));
@@ -52,50 +52,50 @@ classdef GPSDistanceCalculatorTest < AbstractFitnessTrackerTest
         end
         
         function testPlotRoute(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
             end
             
-            calculator = analysis.GPSDistanceCalculator();
-            calculator.analyze(fitnessData);
+            gpsCalc = GPSDistanceCalculator();
+            gpsCalc.analyze(fitnessData);
             
-            testCase.verifyWarningFree(@() calculator.plotRoute());
+            testCase.verifyWarningFree(@() gpsCalc.plotRoute());
             
             close all;
         end
         
         function testPlotSegmentDistances(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
             end
             
-            calculator = analysis.GPSDistanceCalculator();
-            calculator.analyze(fitnessData);
+            gpsCalc = GPSDistanceCalculator();
+            gpsCalc.analyze(fitnessData);
             
-            testCase.verifyWarningFree(@() calculator.plotSegmentDistances());
+            testCase.verifyWarningFree(@() gpsCalc.plotSegmentDistances());
             
             close all;
         end
         
         function testDifferentStrideLengths(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
             end
             
             % Test with default stride
-            calculator1 = analysis.GPSDistanceCalculator();
-            results1 = calculator1.analyze(fitnessData);
+            gpsCalc1 = GPSDistanceCalculator();
+            results1 = gpsCalc1.analyze(fitnessData);
             
             % Test with longer stride
-            calculator2 = analysis.GPSDistanceCalculator();
-            calculator2.StrideLength = 3.0;
-            results2 = calculator2.analyze(fitnessData);
+            gpsCalc2 = GPSDistanceCalculator();
+            gpsCalc2.StrideLength = 3.0;
+            results2 = gpsCalc2.analyze(fitnessData);
             
             % Same distance, but fewer steps with longer stride
             testCase.verifyEqual(results1.totalDistanceMiles, results2.totalDistanceMiles);
@@ -103,16 +103,16 @@ classdef GPSDistanceCalculatorTest < AbstractFitnessTrackerTest
         end
         
         function testDisplayResults(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasPosition
                 testCase.assumeFail('Test data does not contain position data');
             end
             
-            calculator = analysis.GPSDistanceCalculator();
-            calculator.analyze(fitnessData);
+            gpsCalc = GPSDistanceCalculator();
+            gpsCalc.analyze(fitnessData);
             
-            testCase.verifyWarningFree(@() calculator.displayResults());
+            testCase.verifyWarningFree(@() gpsCalc.displayResults());
         end
     end
 end

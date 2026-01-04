@@ -2,13 +2,13 @@ classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testAccelerationAnalysis(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            analyzer = analysis.AccelerationAnalysis();
+            analyzer = AccelerationAnalysis();
             results = analyzer.analyze(fitnessData);
             
             testCase.verifyClass(results, 'struct');
@@ -18,13 +18,13 @@ classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
         end
         
         function testAccelerationAnalysisResults(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            analyzer = analysis.AccelerationAnalysis();
+            analyzer = AccelerationAnalysis();
             results = analyzer.analyze(fitnessData);
             
             testCase.verifyTrue(isfield(results, 'X'));
@@ -38,13 +38,13 @@ classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
         end
         
         function testPlotMagnitude(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            analyzer = analysis.AccelerationAnalysis();
+            analyzer = AccelerationAnalysis();
             analyzer.analyze(fitnessData);
             
             testCase.verifyWarningFree(@() analyzer.plotMagnitude());
@@ -53,13 +53,13 @@ classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
         end
         
         function testPlotComponents(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            analyzer = analysis.AccelerationAnalysis();
+            analyzer = AccelerationAnalysis();
             analyzer.analyze(fitnessData);
             
             testCase.verifyWarningFree(@() analyzer.plotComponents());
@@ -68,13 +68,13 @@ classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
         end
         
         function testDefaultPlot(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            analyzer = analysis.AccelerationAnalysis();
+            analyzer = AccelerationAnalysis();
             analyzer.analyze(fitnessData);
             
             testCase.verifyWarningFree(@() analyzer.plot());
@@ -83,26 +83,26 @@ classdef AccelerationAnalysisTest < AbstractFitnessTrackerTest
         end
         
         function testDisplayResults(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            analyzer = analysis.AccelerationAnalysis();
+            analyzer = AccelerationAnalysis();
             analyzer.analyze(fitnessData);
             
             testCase.verifyWarningFree(@() analyzer.displayResults());
         end
         
         function testGetResults(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            analyzer = analysis.AccelerationAnalysis();
+            analyzer = AccelerationAnalysis();
             analyzer.analyze(fitnessData);
             
             results = analyzer.getResults();

@@ -2,7 +2,7 @@ classdef LoadFitnessDataTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testLoadFitnessData(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             testCase.verifyClass(fitnessData, 'struct');
             testCase.verifyTrue(isfield(fitnessData, 'hasAcceleration') || ...
@@ -13,14 +13,14 @@ classdef LoadFitnessDataTest < AbstractFitnessTrackerTest
         function testLoadFitnessDataInvalidPath(testCase)
             invalidPath = "nonexistent_file.mat";
             
-            testCase.verifyError(@() data.loadFitnessData(invalidPath), ...
+            testCase.verifyError(@() loadFitnessData(invalidPath), ...
                 'data:loadFitnessData:FileNotFound');
         end
         
         function testLoadFitnessDataInvalidFileType(testCase)
             invalidPath = fullfile(testCase.ProjectRoot, 'README.md');  %#ok<NASGU> projectRoot from base class
             
-            testCase.verifyError(@() data.loadFitnessData(invalidPath), ...
+            testCase.verifyError(@() loadFitnessData(invalidPath), ...
                 'data:loadFitnessData:InvalidFileType');
         end
     end

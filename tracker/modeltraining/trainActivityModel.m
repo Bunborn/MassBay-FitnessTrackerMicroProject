@@ -70,10 +70,10 @@ activityModel.features = {'X', 'Y', 'Z'};
 
 % Get absolute path to save model
 scriptPath = fileparts(mfilename('fullpath'));
-modelPath = fullfile(scriptPath, '+analysis', 'models', 'activityModel.mat');
+modelPath = fullfile(scriptPath, '..', 'analysis', 'models', 'activityModel.mat');
 
 % Ensure models folder exists
-modelsFolder = fullfile(scriptPath, '+analysis', 'models');
+modelsFolder = fullfile(scriptPath, '..', 'analysis', 'models');
 if ~isfolder(modelsFolder)
     mkdir(modelsFolder);
 end
@@ -81,7 +81,7 @@ end
 save(modelPath, 'activityModel');
 
 fprintf('Model saved to %s\n', modelPath);
-fprintf('Ready for use with analysis.ActivityClassifier\n');
+fprintf('Ready for use with ActivityClassifier\n');
 
 %% Test with Unknown Data
 fprintf('\nTesting with unknown data...\n');

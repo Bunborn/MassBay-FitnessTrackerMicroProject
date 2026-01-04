@@ -2,13 +2,13 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
     
     methods (Test)
         function testStepCounter(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            stepCounter = analysis.StepCounter();
+            stepCounter = StepCounter();
             stepCounter.Threshold = 1.2;
             stepCounter.MinPeakDistance = 0.5;
             results = stepCounter.analyze(fitnessData);
@@ -19,7 +19,7 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
         end
         
         function testStepCounterProperties(testCase)
-            stepCounter = analysis.StepCounter();
+            stepCounter = StepCounter();
             
             testCase.verifyEqual(stepCounter.Threshold, 1.2);
             testCase.verifyEqual(stepCounter.MinPeakDistance, 0.5);
@@ -29,13 +29,13 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
         end
         
         function testStepCounterResults(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            stepCounter = analysis.StepCounter();
+            stepCounter = StepCounter();
             results = stepCounter.analyze(fitnessData);
             
             testCase.verifyTrue(isfield(results, 'stepCount'));
@@ -49,13 +49,13 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
         end
         
         function testPlotSteps(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            stepCounter = analysis.StepCounter();
+            stepCounter = StepCounter();
             stepCounter.analyze(fitnessData);
             
             testCase.verifyWarningFree(@() stepCounter.plotSteps());
@@ -64,13 +64,13 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
         end
         
         function testDefaultPlot(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            stepCounter = analysis.StepCounter();
+            stepCounter = StepCounter();
             stepCounter.analyze(fitnessData);
             
             testCase.verifyWarningFree(@() stepCounter.plot());
@@ -79,17 +79,17 @@ classdef StepCounterTest < AbstractFitnessTrackerTest
         end
         
         function testDifferentThresholds(testCase)
-            fitnessData = data.loadFitnessData(testCase.getDataPath('ExampleData.mat'));
+            fitnessData = loadFitnessData(testCase.getDataPath('ExampleData.mat'));
             
             if ~fitnessData.hasAcceleration
                 testCase.assumeFail('Test data does not contain acceleration data');
             end
             
-            stepCounter1 = analysis.StepCounter();
+            stepCounter1 = StepCounter();
             stepCounter1.Threshold = 1.0;
             results1 = stepCounter1.analyze(fitnessData);
             
-            stepCounter2 = analysis.StepCounter();
+            stepCounter2 = StepCounter();
             stepCounter2.Threshold = 2.0;
             results2 = stepCounter2.analyze(fitnessData);
             

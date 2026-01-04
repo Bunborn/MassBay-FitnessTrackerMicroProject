@@ -1,4 +1,4 @@
-classdef AccelerationAnalysis < analysis.AnalysisFunction
+classdef AccelerationAnalysis < AnalysisFunction
     
     properties (Constant)
         Name = "Acceleration Analysis"

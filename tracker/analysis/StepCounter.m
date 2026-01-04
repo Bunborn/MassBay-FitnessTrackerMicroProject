@@ -1,4 +1,4 @@
-classdef StepCounter < analysis.AnalysisFunction
+classdef StepCounter < AnalysisFunction
     
     properties (Constant)
         Name = "Step Counter"

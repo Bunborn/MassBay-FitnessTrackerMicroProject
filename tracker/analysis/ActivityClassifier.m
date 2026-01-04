@@ -1,4 +1,4 @@
-classdef ActivityClassifier < analysis.AnalysisFunction
+classdef ActivityClassifier < AnalysisFunction
     
     properties (Constant)
         Name = "Activity Classifier"

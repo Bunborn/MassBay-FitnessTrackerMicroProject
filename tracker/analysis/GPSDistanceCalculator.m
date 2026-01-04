@@ -1,4 +1,4 @@
-classdef GPSDistanceCalculator < analysis.AnalysisFunction
+classdef GPSDistanceCalculator < AnalysisFunction
     
     properties (Constant)
         Name = "GPS Distance Calculator"

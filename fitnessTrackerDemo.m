@@ -12,10 +12,10 @@
 setupPaths();
 
 % Load fitness data
-fitnessData = data.loadFitnessData('data/ExampleData.mat');
+fitnessData = loadFitnessData('data/ExampleData.mat');
 
 %% 2. Acceleration Analysis
-accelAnalyzer = analysis.AccelerationAnalysis();
+accelAnalyzer = AccelerationAnalysis();
 accelAnalyzer.analyze(fitnessData);
 
 % Plot acceleration magnitude over time
@@ -26,7 +26,7 @@ subplot(1,2,2);
 accelAnalyzer.plotComponents(gca);
 
 %% 3. Step Counter - Acceleration Based
-stepCounter = analysis.StepCounter();
+stepCounter = StepCounter();
 stepCounter.Threshold = 1.2;
 stepCounter.MinPeakDistance = 0.5;
 stepResults = stepCounter.analyze(fitnessData);
@@ -35,7 +35,7 @@ figure('Name', 'Step Detection', 'Position', [100 100 800 400]);
 stepCounter.plotSteps(gca);
 
 %% 4. GPS Distance Calculator
-gpsCalc = analysis.GPSDistanceCalculator();
+gpsCalc = GPSDistanceCalculator();
 gpsCalc.StrideLength = 2.5;  % feet
 gpsResults = gpsCalc.analyze(fitnessData);
 
@@ -56,14 +56,14 @@ grid on;
 
 %% 6. Activity Classification (requires trained model)
 % Load activity data
-activityData = data.loadFitnessData('data/ActivityLogs.mat');
+activityData = loadFitnessData('data/ActivityLogs.mat');
 
 try
-    classifier = analysis.ActivityClassifier();
+    classifier = ActivityClassifier();
     classifier.analyze(activityData);
 catch ME
     if strcmp(ME.identifier, 'analysis:ActivityClassifier:ModelNotFound')
-        warning('Run train.trainActivityModel first to use ActivityClassifier');
+        warning('Run trainActivityModel first to use ActivityClassifier');
     else
         rethrow(ME);
     end

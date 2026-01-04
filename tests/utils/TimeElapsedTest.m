@@ -4,7 +4,7 @@ classdef TimeElapsedTest < AbstractFitnessTrackerTest
         function testUtilsTimeElapsed(testCase)
             testTimes = datetime(2024, 1, 1, 12, 0, [0 5 10 15 20]);
             
-            elapsed = utils.timeElapsed(testTimes);
+            elapsed = timeElapsed(testTimes);
             
             testCase.verifyEqual(elapsed(1), 0);
             testCase.verifyEqual(elapsed(2), 5);
@@ -14,7 +14,7 @@ classdef TimeElapsedTest < AbstractFitnessTrackerTest
         function testTimeElapsedWithMinuteRollover(testCase)
             testTimes = datetime(2024, 1, 1, 12, 0, [55 56 57 58 59 0 1]);
             
-            elapsed = utils.timeElapsed(testTimes);
+            elapsed = timeElapsed(testTimes);
             
             testCase.verifyEqual(elapsed(1), 0);
             testCase.verifyGreaterThan(elapsed(end), elapsed(1));
@@ -23,7 +23,7 @@ classdef TimeElapsedTest < AbstractFitnessTrackerTest
         function testTimeElapsedSingleValue(testCase)
             testTimes = datetime(2024, 1, 1, 12, 0, 30);
             
-            elapsed = utils.timeElapsed(testTimes);
+            elapsed = timeElapsed(testTimes);
             
             testCase.verifyEqual(elapsed, 0);
         end
