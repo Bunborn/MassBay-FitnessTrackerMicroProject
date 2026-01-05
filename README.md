@@ -10,42 +10,24 @@ A modular fitness tracker for analyzing accelerometer and GPS data from MATLAB M
 
 ## Quick Start
 
-### Interactive Dashboard (Recommended)
+### Option 1: Interactive Dashboard (Recommended)
 
+Launch the modern UI dashboard:
 ```matlab
-% Launch the interactive dashboard
 launchDashboard
 ```
 
-The dashboard provides a modern UI for:
-- Loading and analyzing data files
-- Real-time step counting with adjustable sensitivity
-- Activity classification visualization
-- GPS route mapping
-- Acceleration analysis
+### Option 2: Command Line Demo
 
-### Programmatic Usage
-
+Run the comprehensive demo script:
 ```matlab
-% Setup paths
-setupPaths();
-
-% Load fitness data
-fitnessData = data.loadFitnessData('data/ExampleData.mat');
-
-% Analyze acceleration and count steps
-stepCounter = analysis.StepCounter();
-stepCounter.Threshold = 1.2;
-results = stepCounter.analyze(fitnessData);
-stepCounter.plotSteps();
-
-% Calculate distance from GPS
-gpsCalc = analysis.GPSDistanceCalculator();
-gpsCalc.analyze(fitnessData);
-gpsCalc.plotRoute();
+fitnessTrackerDemo
 ```
 
-See `fitnessTrackerDemo.m` for a complete walkthrough with visualizations.
+### Documentation
+
+- **Full Documentation:** Open [`docs/index.html`](docs/index.html) in a web browser
+- **Examples:** See [`docs/examples.html`](docs/examples.html) for usage guides
 
 ## Project Structure
 
@@ -57,14 +39,14 @@ See `fitnessTrackerDemo.m` for a complete walkthrough with visualizations.
 │   ├── FitnessTrackerDashboard.m  # Main app
 │   └── README.md            # Dashboard documentation
 ├── tracker/                 # Product code
-│   ├── +analysis/           # Analysis classes
-│   ├── +data/               # Data loading
-│   ├── +train/              # ML model training
-│   ├── +utils/              # Utilities
+│   ├── analysis/            # Analysis classes
+│   ├── dataloading/         # Data loading
+│   ├── modeltraining/       # ML model training
+│   ├── utilities/           # Utilities
 │   └── ARCHITECTURE.md      # Technical documentation
 ├── data/                    # Sample data files
 ├── docs/                    # Examples and API docs
-│   └── tracker.html         # Documentation
+│   └── index.html           # Documentation home
 ├── tests/                   # Unit tests
 └── course_materials/        # Background & prototyping resources
 ```
@@ -73,10 +55,10 @@ See `fitnessTrackerDemo.m` for a complete walkthrough with visualizations.
 
 | Class | Description |
 |-------|-------------|
-| `analysis.AccelerationAnalysis` | Magnitude and statistics from X,Y,Z accelerometer |
-| `analysis.StepCounter` | Peak detection step counting |
-| `analysis.GPSDistanceCalculator` | Distance from GPS coordinates |
-| `analysis.ActivityClassifier` | ML classification (walking, running, sitting) |
+| `AccelerationAnalysis` | Magnitude and statistics from X,Y,Z accelerometer |
+| `StepCounter` | Peak detection step counting |
+| `GPSDistanceCalculator` | Distance from GPS coordinates |
+| `ActivityClassifier` | ML classification (walking, running, sitting) |
 
 ## Course Materials
 

@@ -24,212 +24,105 @@
                 CONTENTS
             </div>
             <nav class="sidebar-nav">
-                <a href="tracker.html">Fitness Tracker</a>
+                <a href="index.html">Fitness Tracker</a>
             </nav>
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Examples</div>
                 <nav class="sidebar-nav">
-                    <a href="#getting-started">Getting Started</a>
-                    <a href="#step-counting">Step Counting</a>
-                    <a href="#gps-tracking">GPS Tracking</a>
-                    <a href="#activity-classification">Activity Classification</a>
-                    <a href="#complete-workflow">Complete Workflow</a>
+                    <a href="#dashboard">Interactive Dashboard</a>
+                    <a href="#command-line">Command Line Demo</a>
                 </nav>
             </div>
         </aside>
         
         <main class="content">
             <div class="content-tabs">
-                <a href="tracker.html">Documentation</a>
+                <a href="index.html">Documentation</a>
                 <a href="examples.html" class="active">Examples</a>
-                <a href="functions.html">Functions</a>
+                
             </div>
             
             <div class="content-body">
                 <h1 class="page-title">Examples</h1>
-                <p class="page-subtitle">Learn how to use Fitness Tracker through practical examples</p>
+                <p class="page-subtitle">Learn how to use Fitness Tracker through practical demos</p>
                 
                 <p class="page-description">
-                    These examples demonstrate common workflows for analyzing fitness data. 
-                    Each example includes complete, runnable code.
+                    The Fitness Tracker includes two complete demo scripts that showcase all features.
+                    Choose the one that fits your workflow.
                 </p>
                 
-                <!-- Getting Started -->
-                <h2 id="getting-started">Getting Started</h2>
-                <p>Set up your environment and load sample data.</p>
+                <!-- Interactive Dashboard -->
+                <h2 id="dashboard">Interactive Dashboard</h2>
+                <p>Launch the interactive dashboard for a modern UI experience with real-time analysis and visualization.</p>
                 
-                <pre><code><span class="code-comment">% Add Fitness Tracker to path</span>
-setupPaths();
-
-<span class="code-comment">% Load the example dataset</span>
-fitnessData = data.loadFitnessData(<span class="code-string">'data/ExampleData.mat'</span>);
-
-<span class="code-comment">% Inspect the loaded data</span>
-disp(fitnessData)
-
-<span class="code-comment">% Check what sensors are available</span>
-if fitnessData.hasAcceleration
-    disp(<span class="code-string">'Accelerometer data available'</span>);
-    disp(fitnessData.Acceleration(1:5, :));  <span class="code-comment">% Preview first 5 rows</span>
-end
-
-if fitnessData.hasPosition
-    disp(<span class="code-string">'GPS data available'</span>);
-    disp(fitnessData.Position(1:5, :));
-end</code></pre>
+                <h3>Quick Start</h3>
+                <pre><code><span class="code-comment">% Launch the dashboard app</span>
+launchDashboard</code></pre>
                 
-                <!-- Step Counting -->
-                <h2 id="step-counting">Step Counting</h2>
-                <p>Detect and count steps from accelerometer data using peak detection.</p>
+                <h3>Features</h3>
+                <ul>
+                    <li><strong>Data Loading:</strong> Select and load .mat files from dropdown menu</li>
+                    <li><strong>Step Counter:</strong> Real-time step detection with adjustable sensitivity slider (5-40 m/s²)</li>
+                    <li><strong>Activity Classification:</strong> Pie chart and timeline visualization of activities</li>
+                    <li><strong>GPS Route:</strong> Map visualization with total distance display</li>
+                    <li><strong>Acceleration Analysis:</strong> Multi-axis component plots with statistics</li>
+                </ul>
                 
-                <h3>Basic Step Count</h3>
-                <pre><code><span class="code-comment">% Create step counter with default settings</span>
-stepCounter = analysis.StepCounter();
-
-<span class="code-comment">% Analyze the data</span>
-results = stepCounter.analyze(fitnessData);
-
-<span class="code-comment">% Display results</span>
-fprintf(<span class="code-string">'Total steps: %d\n'</span>, results.stepCount);
-
-<span class="code-comment">% Visualize detected steps</span>
-figure;
-stepCounter.plotSteps();
-title(<span class="code-string">'Detected Steps'</span>);</code></pre>
+                <h3>Usage</h3>
+                <ol>
+                    <li>Select a data file from the dropdown:
+                        <ul>
+                            <li><code>ExampleData.mat</code> - Contains GPS and acceleration data</li>
+                            <li><code>ActivityLogs.mat</code> - Contains activity classification data</li>
+                        </ul>
+                    </li>
+                    <li>Click "Load Data" to analyze and visualize</li>
+                    <li>Adjust the sensitivity slider to change step detection threshold</li>
+                    <li>Click "Refresh File List" to update available files</li>
+                </ol>
                 
-                <h3>Adjusting Sensitivity</h3>
-                <pre><code><span class="code-comment">% Compare different threshold settings</span>
-thresholds = [1.0, 1.2, 1.5];
-stepCounts = zeros(size(thresholds));
-
-stepCounter = analysis.StepCounter();
-
-for i = 1:length(thresholds)
-    stepCounter.Threshold = thresholds(i);
-    results = stepCounter.analyze(fitnessData);
-    stepCounts(i) = results.stepCount;
-end
-
-<span class="code-comment">% Display comparison</span>
-table(thresholds', stepCounts', <span class="code-string">'VariableNames'</span>, {<span class="code-string">'Threshold'</span>, <span class="code-string">'StepCount'</span>})</code></pre>
+                <p><strong>Note:</strong> The dashboard automatically detects which analyses can be performed based on available data (acceleration, GPS, orientation).</p>
                 
-                <!-- GPS Tracking -->
-                <h2 id="gps-tracking">GPS Distance Tracking</h2>
-                <p>Calculate distance traveled from GPS coordinates.</p>
+                <!-- Command Line Demo -->
+                <h2 id="command-line">Command Line Demo</h2>
+                <p>Run the comprehensive command-line demo that demonstrates all analysis functions with detailed visualizations.</p>
                 
-                <h3>Basic Distance Calculation</h3>
-                <pre><code><span class="code-comment">% Create GPS calculator</span>
-gpsCalc = analysis.GPSDistanceCalculator();
-
-<span class="code-comment">% Calculate distance</span>
-results = gpsCalc.analyze(fitnessData);
-
-<span class="code-comment">% Display results</span>
-fprintf(<span class="code-string">'Distance: %.2f miles (%.0f feet)\n'</span>, ...
-    results.totalDistanceMiles, results.totalDistanceFeet);
-fprintf(<span class="code-string">'Estimated steps: %d\n'</span>, results.estimatedSteps);
-
-<span class="code-comment">% Plot the route</span>
-figure;
-gpsCalc.plotRoute();
-title(<span class="code-string">'GPS Route'</span>);</code></pre>
+                <h3>Quick Start</h3>
+                <pre><code><span class="code-comment">% Run the complete demo script</span>
+fitnessTrackerDemo</code></pre>
                 
-                <h3>Customizing Stride Length</h3>
-                <pre><code><span class="code-comment">% Adjust stride length for different users</span>
-gpsCalc = analysis.GPSDistanceCalculator();
-
-<span class="code-comment">% Short stride (child or slow walk)</span>
-gpsCalc.StrideLength = 2.0;  <span class="code-comment">% feet</span>
-results1 = gpsCalc.analyze(fitnessData);
-
-<span class="code-comment">% Long stride (tall adult or running)</span>
-gpsCalc.StrideLength = 3.0;
-results2 = gpsCalc.analyze(fitnessData);
-
-fprintf(<span class="code-string">'Short stride estimate: %d steps\n'</span>, results1.estimatedSteps);
-fprintf(<span class="code-string">'Long stride estimate: %d steps\n'</span>, results2.estimatedSteps);</code></pre>
+                <h3>What the Demo Shows</h3>
+                <p>The <code>fitnessTrackerDemo.m</code> script demonstrates:</p>
+                <ul>
+                    <li><strong>Data Loading:</strong> How to load and inspect fitness data</li>
+                    <li><strong>Acceleration Analysis:</strong> Magnitude and component visualization</li>
+                    <li><strong>Step Detection:</strong> Peak detection with customizable thresholds</li>
+                    <li><strong>GPS Distance Calculation:</strong> Route mapping and distance metrics</li>
+                    <li><strong>Activity Classification:</strong> Machine learning-based activity recognition</li>
+                    <li><strong>Summary Dashboard:</strong> Combined visualization of all analyses</li>
+                </ul>
                 
-                <!-- Activity Classification -->
-                <h2 id="activity-classification">Activity Classification</h2>
-                <p>Classify activities using machine learning.</p>
+                <h3>Exploring the Code</h3>
+                <p>Open <code>fitnessTrackerDemo.m</code> in the MATLAB editor to see complete, runnable examples of:</p>
+                <ul>
+                    <li>Creating and configuring analysis objects</li>
+                    <li>Running analyses on fitness data</li>
+                    <li>Accessing and displaying results</li>
+                    <li>Creating custom visualizations</li>
+                    <li>Comparing different analysis parameters</li>
+                </ul>
                 
-                <h3>Train the Model (One-Time Setup)</h3>
-                <pre><code><span class="code-comment">% Train the activity model (only needed once)</span>
-<span class="code-comment">% This creates +analysis/models/activityModel.mat</span>
-train.trainActivityModel;</code></pre>
+                <h3>Customizing the Demo</h3>
+                <p>You can modify the demo script to:</p>
+                <ul>
+                    <li>Use your own data files</li>
+                    <li>Adjust analysis parameters (thresholds, stride length, etc.)</li>
+                    <li>Add additional visualizations</li>
+                    <li>Export results to files</li>
+                </ul>
                 
-                <h3>Classify Activities</h3>
-                <pre><code><span class="code-comment">% Create classifier (uses pre-trained model)</span>
-classifier = analysis.ActivityClassifier();
-
-<span class="code-comment">% Classify the data</span>
-results = classifier.analyze(fitnessData);
-
-<span class="code-comment">% Display activity breakdown</span>
-classifier.displayResults();
-
-<span class="code-comment">% Visualize activity distribution</span>
-figure;
-subplot(1,2,1);
-classifier.plotDistribution();
-
-subplot(1,2,2);
-classifier.plotTimeline();</code></pre>
-                
-                <!-- Complete Workflow -->
-                <h2 id="complete-workflow">Complete Analysis Workflow</h2>
-                <p>Run all analyses on a dataset and create a summary dashboard.</p>
-                
-                <pre><code><span class="code-comment">%% Setup</span>
-setupPaths();
-fitnessData = data.loadFitnessData(<span class="code-string">'data/ExampleData.mat'</span>);
-
-<span class="code-comment">%% Run All Analyses</span>
-<span class="code-comment">% Acceleration</span>
-accel = analysis.AccelerationAnalysis();
-accelResults = accel.analyze(fitnessData);
-
-<span class="code-comment">% Step counting</span>
-steps = analysis.StepCounter();
-stepResults = steps.analyze(fitnessData);
-
-<span class="code-comment">% GPS distance</span>
-gps = analysis.GPSDistanceCalculator();
-gpsResults = gps.analyze(fitnessData);
-
-<span class="code-comment">% Activity classification</span>
-activity = analysis.ActivityClassifier();
-activityResults = activity.analyze(fitnessData);
-
-<span class="code-comment">%% Create Dashboard</span>
-figure(<span class="code-string">'Position'</span>, [100 100 1200 800], <span class="code-string">'Name'</span>, <span class="code-string">'Fitness Dashboard'</span>);
-
-<span class="code-comment">% Acceleration magnitude</span>
-subplot(2,2,1);
-accel.plotMagnitude();
-title(<span class="code-string">'Acceleration Magnitude'</span>);
-
-<span class="code-comment">% Step detection</span>
-subplot(2,2,2);
-steps.plotSteps();
-title(sprintf(<span class="code-string">'Steps Detected: %d'</span>, stepResults.stepCount));
-
-<span class="code-comment">% GPS route</span>
-subplot(2,2,3);
-gps.plotRoute();
-title(sprintf(<span class="code-string">'Distance: %.2f miles'</span>, gpsResults.totalDistanceMiles));
-
-<span class="code-comment">% Activity distribution</span>
-subplot(2,2,4);
-activity.plotDistribution();
-title(<span class="code-string">'Activity Breakdown'</span>);
-
-<span class="code-comment">%% Print Summary</span>
-fprintf(<span class="code-string">'\n=== Fitness Summary ===\n'</span>);
-fprintf(<span class="code-string">'Mean acceleration: %.2f g\n'</span>, accelResults.stats.mean);
-fprintf(<span class="code-string">'Total steps: %d\n'</span>, stepResults.stepCount);
-fprintf(<span class="code-string">'Distance traveled: %.2f miles\n'</span>, gpsResults.totalDistanceMiles);
-fprintf(<span class="code-string">'Activities detected: %s\n'</span>, strjoin(activityResults.uniqueActivities, <span class="code-string">', '</span>));</code></pre>
+                <h3>Location</h3>
+                <p>The demo script is located at: <code>fitnessTrackerDemo.m</code> in the project root directory.</p>
                 
             </div>
         </main>

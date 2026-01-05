@@ -32,12 +32,12 @@
             </nav>
             
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Packages</div>
+                <div class="sidebar-section-title">Modules</div>
                 <nav class="sidebar-nav">
-                    <a href="#data">+data</a>
-                    <a href="#analysis">+analysis</a>
-                    <a href="#train">+train</a>
-                    <a href="#utils">+utils</a>
+                    <a href="#data">dataloading</a>
+                    <a href="#analysis">analysis</a>
+                    <a href="#train">modeltraining</a>
+                    <a href="#utils">utilities</a>
                 </nav>
             </div>
             <div class="sidebar-section">
@@ -54,9 +54,9 @@
         <!-- Main Content -->
         <main class="content">
             <div class="content-tabs">
-                <a href="tracker.html" class="active">Documentation</a>
+                <a href="index.html" class="active">Documentation</a>
                 <a href="examples.html">Examples</a>
-                <a href="functions.html">Functions</a>
+                
             </div>
             
             <div class="content-body">
@@ -87,22 +87,22 @@
                             <th>Contents</th>
                         </tr>
                         <tr>
-                            <td><code>+data</code></td>
+                            <td><code>dataloading</code></td>
                             <td><strong>Data Loading &amp; Cleaning</strong></td>
                             <td>Functions to load raw sensor data from .mat files, validate structure, and prepare timetables for analysis</td>
                         </tr>
                         <tr>
-                            <td><code>+analysis</code></td>
+                            <td><code>analysis</code></td>
                             <td><strong>Analysis Functions</strong></td>
                             <td>Classes that implement the <code>AnalysisFunction</code> interface for processing fitness data (step counting, distance calculation, activity classification)</td>
                         </tr>
                         <tr>
-                            <td><code>+train</code></td>
+                            <td><code>modeltraining</code></td>
                             <td><strong>Offline Model Training</strong></td>
                             <td>Scripts to train machine learning models from labeled data; models are saved and used by analysis classes at runtime</td>
                         </tr>
                         <tr>
-                            <td><code>+utils</code></td>
+                            <td><code>utilities</code></td>
                             <td><strong>Helper Functions</strong></td>
                             <td>Utility functions shared across packages (e.g., time conversions)</td>
                         </tr>
@@ -162,7 +162,7 @@ stepCounter.plotSteps();</code></pre>
                     <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
-                    <h3>Data Loading (+data)</h3>
+                    <h3>Data Loading (dataloading)</h3>
                 </div>
                 <div class="section-content">
                     <ul class="item-list">
@@ -191,7 +191,7 @@ fitnessData = data.loadFitnessData(dataPath, <span class="code-string">'Validate
                     <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
-                    <h3>Analysis Classes (+analysis)</h3>
+                    <h3>Analysis Classes (analysis)</h3>
                 </div>
                 <div class="section-content">
                     <p style="margin-bottom: 15px; color: var(--text-secondary);">
@@ -238,7 +238,7 @@ fitnessData = data.loadFitnessData(dataPath, <span class="code-string">'Validate
                     <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
-                    <h3>Model Training (+train)</h3>
+                    <h3>Model Training (modeltraining)</h3>
                 </div>
                 <div class="section-content">
                     <ul class="item-list">
@@ -252,7 +252,7 @@ fitnessData = data.loadFitnessData(dataPath, <span class="code-string">'Validate
                     <pre><code><span class="code-comment">% Run training script</span>
 train.trainActivityModel</code></pre>
                     <p style="margin-top: 10px; color: var(--text-secondary); font-size: 13px;">
-                        Saves model to <code>+analysis/models/activityModel.mat</code>
+                        Saves model to <code>analysis/models/activityModel.mat</code>
                     </p>
                 </div>
                 
@@ -261,7 +261,7 @@ train.trainActivityModel</code></pre>
                     <svg class="section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
-                    <h3>Utilities (+utils)</h3>
+                    <h3>Utilities (utilities)</h3>
                 </div>
                 <div class="section-content">
                     <ul class="item-list">

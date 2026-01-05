@@ -34,6 +34,10 @@ classdef StepCounter < AnalysisFunction
                     'Unexpected acceleration data format');
             end
             
+            % Suppress warning if threshold is too high
+            warnState = warning('off', 'MATLAB:findpeaks:largeMinPeakHeight');
+            cleanupObj = onCleanup(@() warning(warnState));
+            
             [peaks, locs] = findpeaks(magnitude, ...
                 'MinPeakHeight', obj.Threshold, ...
                 'MinPeakDistance', obj.MinPeakDistance);
@@ -72,14 +76,22 @@ classdef StepCounter < AnalysisFunction
             
             plot(ax, obj.results.magnitude);
             hold(ax, 'on');
-            plot(ax, obj.results.peakLocations, obj.results.peakValues, 'rv', 'MarkerSize', 8);
-            yline(ax, obj.results.threshold, 'r--', 'Threshold');
+            
+            % Only plot peaks if any were detected
+            if ~isempty(obj.results.peakLocations)
+                plot(ax, obj.results.peakLocations, obj.results.peakValues, 'rv', 'MarkerSize', 8);
+                yline(ax, obj.results.threshold, 'r--', 'Threshold');
+                legend(ax, 'Magnitude', 'Detected Steps', 'Threshold');
+            else
+                yline(ax, obj.results.threshold, 'r--', 'Threshold');
+                legend(ax, 'Magnitude', 'Threshold');
+            end
+            
             hold(ax, 'off');
             
             xlabel(ax, 'Sample');
             ylabel(ax, 'Acceleration Magnitude (m/s^2)');
             title(ax, sprintf('Step Detection (Count: %d)', obj.results.stepCount));
-            legend(ax, 'Magnitude', 'Detected Steps', 'Threshold');
             grid(ax, 'on');
         end
     end
