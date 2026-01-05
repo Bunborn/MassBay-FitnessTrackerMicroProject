@@ -65,8 +65,6 @@ fitnessTrackerDemo
 The `course_materials/` folder contains resources for background and prototyping:
 
 - **ExampleModel.mlx** — Live Script demonstrating data exploration and analysis concepts
-- **Instructions.pdf** — Guide for collecting data with MATLAB Mobile
-- **GradingRubric.pdf** — Project requirements and grading criteria
 
 These materials provide context for the project goals and can be used as a starting point for experimentation before working with the modular tracker code.
 
@@ -76,5 +74,6 @@ These materials provide context for the project goals and can be used as a start
 results = runtests('tests');
 table(results)
 ```
+
 
 
